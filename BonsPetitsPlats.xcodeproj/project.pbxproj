@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		A02092E2223695ED005B7922 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02092E1223695ED005B7922 /* AppDelegate.swift */; };
-		A02092E4223695ED005B7922 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02092E3223695ED005B7922 /* ViewController.swift */; };
 		A02092E7223695ED005B7922 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02092E5223695ED005B7922 /* Main.storyboard */; };
 		A02092E9223695F3005B7922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02092E8223695F3005B7922 /* Assets.xcassets */; };
 		A02092EC223695F3005B7922 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02092EA223695F3005B7922 /* LaunchScreen.storyboard */; };
 		A02092F7223695F3005B7922 /* BonsPetitsPlatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02092F6223695F3005B7922 /* BonsPetitsPlatsTests.swift */; };
+		A02093112236C65A005B7922 /* RecipleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02093102236C65A005B7922 /* RecipleaseViewController.swift */; };
+		A02093132236C67E005B7922 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02093122236C67E005B7922 /* FavoriteViewController.swift */; };
+		A02093182236CA3C005B7922 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02093172236CA3C005B7922 /* SearchResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +30,6 @@
 /* Begin PBXFileReference section */
 		A02092DE223695ED005B7922 /* BonsPetitsPlats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BonsPetitsPlats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A02092E1223695ED005B7922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A02092E3223695ED005B7922 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A02092E6223695ED005B7922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A02092E8223695F3005B7922 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A02092EB223695F3005B7922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +37,9 @@
 		A02092F2223695F3005B7922 /* BonsPetitsPlatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BonsPetitsPlatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A02092F6223695F3005B7922 /* BonsPetitsPlatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonsPetitsPlatsTests.swift; sourceTree = "<group>"; };
 		A02092F8223695F3005B7922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A02093102236C65A005B7922 /* RecipleaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseViewController.swift; sourceTree = "<group>"; };
+		A02093122236C67E005B7922 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		A02093172236CA3C005B7922 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +81,10 @@
 		A02092E0223695ED005B7922 /* BonsPetitsPlats */ = {
 			isa = PBXGroup;
 			children = (
-				A02092E1223695ED005B7922 /* AppDelegate.swift */,
-				A02092E3223695ED005B7922 /* ViewController.swift */,
-				A02092E5223695ED005B7922 /* Main.storyboard */,
-				A02092E8223695F3005B7922 /* Assets.xcassets */,
-				A02092EA223695F3005B7922 /* LaunchScreen.storyboard */,
+				A02093042236963A005B7922 /* SupportingFiles */,
+				A020930322369631005B7922 /* Controller */,
+				A020930222369628005B7922 /* View */,
+				A020930122369620005B7922 /* Model */,
 				A02092ED223695F3005B7922 /* Info.plist */,
 			);
 			path = BonsPetitsPlats;
@@ -94,6 +97,41 @@
 				A02092F8223695F3005B7922 /* Info.plist */,
 			);
 			path = BonsPetitsPlatsTests;
+			sourceTree = "<group>";
+		};
+		A020930122369620005B7922 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A020930222369628005B7922 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A02092EA223695F3005B7922 /* LaunchScreen.storyboard */,
+				A02092E5223695ED005B7922 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A020930322369631005B7922 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A02093102236C65A005B7922 /* RecipleaseViewController.swift */,
+				A02093122236C67E005B7922 /* FavoriteViewController.swift */,
+				A02093172236CA3C005B7922 /* SearchResultViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A02093042236963A005B7922 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				A02092E8223695F3005B7922 /* Assets.xcassets */,
+				A02092E1223695ED005B7922 /* AppDelegate.swift */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,8 +235,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A02092E4223695ED005B7922 /* ViewController.swift in Sources */,
 				A02092E2223695ED005B7922 /* AppDelegate.swift in Sources */,
+				A02093132236C67E005B7922 /* FavoriteViewController.swift in Sources */,
+				A02093182236CA3C005B7922 /* SearchResultViewController.swift in Sources */,
+				A02093112236C65A005B7922 /* RecipleaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
