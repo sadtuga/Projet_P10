@@ -9,6 +9,13 @@
 import UIKit
 
 class SearchResultViewController: UIViewController {
+    
+    @IBOutlet weak var background: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var like: UILabel!
+    @IBOutlet weak var duration: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
