@@ -16,6 +16,9 @@ class RecipleaseViewController: UIViewController {
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
+    let yummly = YummlyService()
+    var list: RecipeYummly!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,6 +54,23 @@ class RecipleaseViewController: UIViewController {
     }
     
     @IBAction func didTapeSearchButton(_ sender: Any) {
+        let option = List.shared.createRequestOption()
+        
+        guard option != "" else {
+            return
+        }
+        
+        yummly.getReciteList(text: option) { (succes, recites) in
+            self.list = recites
+            self.performSegue(withIdentifier: "segueToList", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToList" {
+            let successVC = segue.destination as! ListViewController
+            successVC.list = list
+        }
     }
     
     private func activateClearButton() {

@@ -19,6 +19,10 @@
 		A0A8BF342247901500496D34 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A8BF332247901500496D34 /* ListTableViewCell.swift */; };
 		A0A8BF362247E47500496D34 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A8BF352247E47500496D34 /* Ingredient.swift */; };
 		A0D7C185224924DB0080F144 /* FavorisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D7C184224924DB0080F144 /* FavorisTableViewCell.swift */; };
+		A0E28DC4224BE2A5000DC02F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E28DC3224BE2A5000DC02F /* ListViewController.swift */; };
+		A0E9CFFE224D152F00A5C504 /* RecipesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E9CFFD224D152F00A5C504 /* RecipesListTableViewCell.swift */; };
+		A0F81652224A7C8E005EE822 /* yummlyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F81651224A7C8E005EE822 /* yummlyService.swift */; };
+		A0F81654224A8CC6005EE822 /* RecipeYummly.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F81653224A8CC6005EE822 /* RecipeYummly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,10 @@
 		A0A8BF332247901500496D34 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		A0A8BF352247E47500496D34 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		A0D7C184224924DB0080F144 /* FavorisTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavorisTableViewCell.swift; sourceTree = "<group>"; };
+		A0E28DC3224BE2A5000DC02F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		A0E9CFFD224D152F00A5C504 /* RecipesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListTableViewCell.swift; sourceTree = "<group>"; };
+		A0F81651224A7C8E005EE822 /* yummlyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yummlyService.swift; sourceTree = "<group>"; };
+		A0F81653224A8CC6005EE822 /* RecipeYummly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeYummly.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +118,7 @@
 		A020930122369620005B7922 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A0D7C18022490D3A0080F144 /* New Group */,
+				A0D7C18022490D3A0080F144 /* DishList */,
 				A0D7C17F22490A400080F144 /* Ingredient List */,
 			);
 			path = Model;
@@ -122,6 +130,7 @@
 				A02092EA223695F3005B7922 /* LaunchScreen.storyboard */,
 				A02092E5223695ED005B7922 /* Main.storyboard */,
 				A0A8BF332247901500496D34 /* ListTableViewCell.swift */,
+				A0E9CFFD224D152F00A5C504 /* RecipesListTableViewCell.swift */,
 				A0D7C184224924DB0080F144 /* FavorisTableViewCell.swift */,
 			);
 			path = View;
@@ -133,6 +142,7 @@
 				A02093102236C65A005B7922 /* RecipleaseViewController.swift */,
 				A02093122236C67E005B7922 /* FavoriteViewController.swift */,
 				A02093172236CA3C005B7922 /* SearchResultViewController.swift */,
+				A0E28DC3224BE2A5000DC02F /* ListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -155,11 +165,13 @@
 			path = "Ingredient List";
 			sourceTree = "<group>";
 		};
-		A0D7C18022490D3A0080F144 /* New Group */ = {
+		A0D7C18022490D3A0080F144 /* DishList */ = {
 			isa = PBXGroup;
 			children = (
+				A0F81651224A7C8E005EE822 /* yummlyService.swift */,
+				A0F81653224A8CC6005EE822 /* RecipeYummly.swift */,
 			);
-			path = "New Group";
+			path = DishList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,9 +224,11 @@
 				TargetAttributes = {
 					A02092DD223695ED005B7922 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					A02092F1223695F3005B7922 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = A02092DD223695ED005B7922;
 					};
 				};
@@ -263,14 +277,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0F81652224A7C8E005EE822 /* yummlyService.swift in Sources */,
 				A0A8BF342247901500496D34 /* ListTableViewCell.swift in Sources */,
 				A02092E2223695ED005B7922 /* AppDelegate.swift in Sources */,
 				A0D7C185224924DB0080F144 /* FavorisTableViewCell.swift in Sources */,
+				A0F81654224A8CC6005EE822 /* RecipeYummly.swift in Sources */,
+				A0E28DC4224BE2A5000DC02F /* ListViewController.swift in Sources */,
 				A0A8BF362247E47500496D34 /* Ingredient.swift in Sources */,
 				A02093132236C67E005B7922 /* FavoriteViewController.swift in Sources */,
 				A02093182236CA3C005B7922 /* SearchResultViewController.swift in Sources */,
 				A02093112236C65A005B7922 /* RecipleaseViewController.swift in Sources */,
 				A0708FD4223AC1770036E0A5 /* List.swift in Sources */,
+				A0E9CFFE224D152F00A5C504 /* RecipesListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,7 +459,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MarquesLucas.BonsPetitsPlats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -459,7 +477,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MarquesLucas.BonsPetitsPlats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -479,7 +497,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MarquesLucas.BonsPetitsPlatsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BonsPetitsPlats.app/BonsPetitsPlats";
 			};
@@ -500,7 +518,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.MarquesLucas.BonsPetitsPlatsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BonsPetitsPlats.app/BonsPetitsPlats";
 			};

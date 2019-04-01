@@ -26,4 +26,18 @@ class List {
     func removeAll() {
         list.removeAll()
     }
+    
+    func createRequestOption() -> String {
+        var option: String = ""
+        for e in list {
+            option += e.name + "+"
+        }
+        
+        if option != "" {
+            let index = option.lastIndex(of: "+")!
+            option.remove(at: index)
+        }
+        
+        return option
+    }
 }

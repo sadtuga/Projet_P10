@@ -9,12 +9,7 @@
 import UIKit
 
 class FavorisTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var backgroud: UIImageView!
-    @IBOutlet weak var like: UILabel!
-    @IBOutlet weak var duration: UILabel!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var ingredient: UILabel!
+
     
 
     override func awakeFromNib() {
