@@ -34,6 +34,19 @@ class RecipesListTableViewCell: UITableViewCell {
         self.like.text = String(like)
         self.time.text = String(time)
         self.name.text = name
-        //self.ingredient.text = ingredient
+        self.ingredient.text = addIngredient(ingredient: ingredient)
+    }
+    
+    private func addIngredient(ingredient: [String]) -> String {
+        var option: String = ""
+        for e in ingredient {
+            option += e + ", "
+        }
+        
+        if option != "" {
+            option = option.replacingOccurrences(of: ", ", with: "")
+        }
+        
+        return option
     }
 }

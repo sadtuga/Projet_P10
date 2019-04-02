@@ -15,23 +15,28 @@ class SearchResultViewController: UIViewController {
     @IBOutlet weak var like: UILabel!
     @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var ingredientList: UITextView!
     
+    var listDetails: Recipe?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        if listDetails != nil {
+            refreshSreen(like: listDetails!.rating, duration: listDetails!.totalTimeInSeconds)
+            makeIngredientList()
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func refreshSreen(like: Int, duration: Int) {
+        self.name.text = listDetails?.recipeName
+        self.like.text = String(like)
+        self.duration.text = String(duration)
+        self.background = nil
     }
-    */
-
+    
+    private func makeIngredientList() {
+        for e in listDetails!.ingredients {
+            ingredientList.text += "- " + e + "\n"
+        }
+    }
 }

@@ -15,8 +15,8 @@ class ListViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var list: RecipeYummly?
-    let get = GetImage()
-
+    var listDetails: Recipe!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.reloadData()
@@ -29,6 +29,13 @@ class ListViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         result.isHidden = true
         activityIndicator.isHidden = false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToDetails" {
+            let successVC = segue.destination as! SearchResultViewController
+            successVC.listDetails = listDetails
+        }
     }
     
 }
@@ -60,5 +67,10 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: nil)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        listDetails = list?.matches[indexPath.row]
+        self.performSegue(withIdentifier: "segueToDetails", sender: self)
     }
 }

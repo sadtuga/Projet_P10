@@ -141,8 +141,8 @@
 			children = (
 				A02093102236C65A005B7922 /* RecipleaseViewController.swift */,
 				A02093122236C67E005B7922 /* FavoriteViewController.swift */,
-				A02093172236CA3C005B7922 /* SearchResultViewController.swift */,
 				A0E28DC3224BE2A5000DC02F /* ListViewController.swift */,
+				A02093172236CA3C005B7922 /* SearchResultViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
