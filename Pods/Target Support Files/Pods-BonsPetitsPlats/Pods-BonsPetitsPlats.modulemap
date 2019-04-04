@@ -1,0 +1,6 @@
+framework module Pods_BonsPetitsPlats {
+  umbrella header "Pods-BonsPetitsPlats-umbrella.h"
+
+  export *
+  module * { export * }
+}
