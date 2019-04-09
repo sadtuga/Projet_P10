@@ -27,6 +27,16 @@ class SearchResultViewController: UIViewController {
         }
     }
     
+    @IBAction func addToFavorite(_ sender: Any) {
+        let recipeDedails = RecipeP(context: AppDelegate.viewContext)
+        recipeDedails.name = name.text
+        recipeDedails.rate = Int64(like.text!)!
+        recipeDedails.time = Int64(duration.text!)!
+        recipeDedails.image = nil
+        recipeDedails.ingredients = ingredientList.text
+        try? AppDelegate.viewContext.save()
+    }
+    
     private func refreshSreen(like: Int, duration: Int) {
         self.name.text = listDetails?.recipeName
         self.like.text = String(like)

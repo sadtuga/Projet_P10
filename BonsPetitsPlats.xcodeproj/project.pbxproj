@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		32B8514DC05BDF07FF53F1F7 /* Pods_BonsPetitsPlatsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E94DFDF894378862B2D0CD /* Pods_BonsPetitsPlatsTests.framework */; };
+		A0091D6B225CD3B2003A683B /* RecipePlease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0091D69225CD3B2003A683B /* RecipePlease.xcdatamodeld */; };
+		A0091D6D225CDA7A003A683B /* RecipeP.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0091D6C225CDA7A003A683B /* RecipeP.swift */; };
 		A02092E2223695ED005B7922 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02092E1223695ED005B7922 /* AppDelegate.swift */; };
 		A02092E7223695ED005B7922 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02092E5223695ED005B7922 /* Main.storyboard */; };
 		A02092E9223695F3005B7922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02092E8223695F3005B7922 /* Assets.xcassets */; };
@@ -42,6 +44,8 @@
 		2FFC95F6B32E666EC769AE6E /* Pods-BonsPetitsPlatsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BonsPetitsPlatsTests.debug.xcconfig"; path = "Target Support Files/Pods-BonsPetitsPlatsTests/Pods-BonsPetitsPlatsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6176351380011EE78BBFBCD8 /* Pods-BonsPetitsPlats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BonsPetitsPlats.release.xcconfig"; path = "Target Support Files/Pods-BonsPetitsPlats/Pods-BonsPetitsPlats.release.xcconfig"; sourceTree = "<group>"; };
 		67E94DFDF894378862B2D0CD /* Pods_BonsPetitsPlatsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BonsPetitsPlatsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0091D6A225CD3B2003A683B /* RecipePlease.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RecipePlease.xcdatamodel; sourceTree = "<group>"; };
+		A0091D6C225CDA7A003A683B /* RecipeP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeP.swift; sourceTree = "<group>"; };
 		A02092DE223695ED005B7922 /* BonsPetitsPlats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BonsPetitsPlats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A02092E1223695ED005B7922 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A02092E6223695ED005B7922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -94,7 +98,6 @@
 				2FFC95F6B32E666EC769AE6E /* Pods-BonsPetitsPlatsTests.debug.xcconfig */,
 				2455A92FAF36212D5A6540EE /* Pods-BonsPetitsPlatsTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -142,6 +145,7 @@
 		A020930122369620005B7922 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A07F14E82259ED940071A9F8 /* Persistence */,
 				A0D7C18022490D3A0080F144 /* DishList */,
 				A0D7C17F22490A400080F144 /* Ingredient List */,
 			);
@@ -178,6 +182,15 @@
 				A02092E1223695ED005B7922 /* AppDelegate.swift */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		A07F14E82259ED940071A9F8 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				A0091D69225CD3B2003A683B /* RecipePlease.xcdatamodeld */,
+				A0091D6C225CDA7A003A683B /* RecipeP.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		A0D7C17F22490A400080F144 /* Ingredient List */ = {
@@ -407,11 +420,13 @@
 			files = (
 				A0F81652224A7C8E005EE822 /* yummlyService.swift in Sources */,
 				A0A8BF342247901500496D34 /* ListTableViewCell.swift in Sources */,
+				A0091D6D225CDA7A003A683B /* RecipeP.swift in Sources */,
 				A02092E2223695ED005B7922 /* AppDelegate.swift in Sources */,
 				A0D7C185224924DB0080F144 /* FavorisTableViewCell.swift in Sources */,
 				A0F81654224A8CC6005EE822 /* RecipeYummly.swift in Sources */,
 				A0E28DC4224BE2A5000DC02F /* ListViewController.swift in Sources */,
 				A0A8BF362247E47500496D34 /* Ingredient.swift in Sources */,
+				A0091D6B225CD3B2003A683B /* RecipePlease.xcdatamodeld in Sources */,
 				A02093132236C67E005B7922 /* FavoriteViewController.swift in Sources */,
 				A02093182236CA3C005B7922 /* SearchResultViewController.swift in Sources */,
 				A02093112236C65A005B7922 /* RecipleaseViewController.swift in Sources */,
@@ -687,6 +702,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A0091D69225CD3B2003A683B /* RecipePlease.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A0091D6A225CD3B2003A683B /* RecipePlease.xcdatamodel */,
+			);
+			currentVersion = A0091D6A225CD3B2003A683B /* RecipePlease.xcdatamodel */;
+			path = RecipePlease.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A02092D6223695ED005B7922 /* Project object */;
 }
