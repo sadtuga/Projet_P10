@@ -38,6 +38,10 @@ class ListViewController: UIViewController {
         }
     }
     
+    @IBAction func dismiss() {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension ListViewController: UITableViewDataSource, UITableViewDelegate {

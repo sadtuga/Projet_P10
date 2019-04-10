@@ -42,6 +42,10 @@ class SearchResultViewController: UIViewController {
         try? AppDelegate.viewContext.save()
     }
     
+    @IBAction func dismiss() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     private func refreshSreen(like: Int, duration: Int, name: String) {
         self.name.text = name
         self.like.text = String(like)
