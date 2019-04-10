@@ -13,7 +13,7 @@ class FavoriteViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var recipeList = RecipeP.all
-    var listDetails: Recipe?
+    var favListDetails: RecipeP?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class FavoriteViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToDetails" {
             let successVC = segue.destination as! SearchResultViewController
-            //successVC.list = list
+            successVC.favListDetails = favListDetails
         }
     }
 
@@ -52,7 +52,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //listDetails = recipeList[indexPath.row]
+        favListDetails = recipeList[indexPath.row]
         self.performSegue(withIdentifier: "segueToDetails", sender: self)
     }
     

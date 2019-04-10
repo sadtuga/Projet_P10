@@ -18,12 +18,17 @@ class SearchResultViewController: UIViewController {
     @IBOutlet weak var ingredientList: UITextView!
     
     var listDetails: Recipe?
+    var favListDetails: RecipeP?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         if listDetails != nil {
-            refreshSreen(like: listDetails!.rating, duration: listDetails!.totalTimeInSeconds)
-            makeIngredientList()
+            refreshSreen(like: listDetails!.rating, duration: listDetails!.totalTimeInSeconds, name: listDetails!.recipeName)
+            makeIngredientList(test: listDetails!.ingredients)
+        }
+        if favListDetails != nil {
+            refreshSreen(like:Int(favListDetails!.rate), duration: Int(favListDetails!.time), name: favListDetails!.name!)
+            makeIngredientList(test: favListDetails!.ingredients!)
         }
     }
     
@@ -37,16 +42,20 @@ class SearchResultViewController: UIViewController {
         try? AppDelegate.viewContext.save()
     }
     
-    private func refreshSreen(like: Int, duration: Int) {
-        self.name.text = listDetails?.recipeName
+    private func refreshSreen(like: Int, duration: Int, name: String) {
+        self.name.text = name
         self.like.text = String(like)
         self.duration.text = String(duration)
         self.background = nil
     }
     
-    private func makeIngredientList() {
-        for e in listDetails!.ingredients {
+    private func makeIngredientList(test: [String]) {
+        for e in test {
             ingredientList.text += "- " + e + "\n"
         }
+    }
+    
+    private func makeIngredientList(test: String) {
+        ingredientList.text = favListDetails?.ingredients
     }
 }
