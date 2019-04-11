@@ -109,7 +109,6 @@ extension RecipleaseViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
         if editingStyle == .delete {
             List.shared.removeIngredient(index: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)

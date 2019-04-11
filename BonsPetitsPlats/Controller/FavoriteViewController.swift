@@ -7,16 +7,21 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoriteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var recipeList = RecipeP.all
+    var recipeList: [RecipeP]?
     var favListDetails: RecipeP?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        recipeList = RecipeP.all
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -35,7 +40,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeList.count
+        return recipeList!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -44,7 +49,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
-        let test = recipeList[indexPath.row]
+        let test = recipeList![indexPath.row]
         
         cell.configure(name: test.name!, ingredient: test.ingredients!, time: Int(test.time), like: Int(test.rate), background: nil)
         
@@ -52,8 +57,17 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        favListDetails = recipeList[indexPath.row]
+        favListDetails = recipeList![indexPath.row]
         self.performSegue(withIdentifier: "segueToDetails", sender: self)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            AppDelegate.viewContext.delete(RecipeP.all[indexPath.row])
+            recipeList?.remove(at: indexPath.row)
+            try? AppDelegate.viewContext.save()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
     
 }

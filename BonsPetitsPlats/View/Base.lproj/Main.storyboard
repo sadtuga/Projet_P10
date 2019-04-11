@@ -158,7 +158,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.16282719373703003" green="0.16298320889472961" blue="0.16285133361816406" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.34983664751052856" green="0.35012659430503845" blue="0.34988158941268921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="RKs-Nb-lhd" firstAttribute="trailing" secondItem="da8-Rf-XJL" secondAttribute="trailing" id="Gcd-W1-YKx"/>
@@ -179,7 +179,7 @@
                             <outletCollection property="gestureRecognizers" destination="BpT-hc-gvn" appends="YES" id="PJU-Ca-18A"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Reciplease" id="Trf-pS-fHu"/>
+                    <tabBarItem key="tabBarItem" title="Reciplease" image="Dinner" id="Trf-pS-fHu"/>
                     <navigationItem key="navigationItem" title="Reciplease" id="x35-Ea-5Qi"/>
                     <connections>
                         <outlet property="addButton" destination="q8j-4n-ehI" id="38r-nG-PhB"/>
@@ -187,7 +187,7 @@
                         <outlet property="searchButton" destination="wJh-rf-i5u" id="VxQ-gQ-4Fn"/>
                         <outlet property="tableView" destination="hPh-mn-OGa" id="Rzd-CR-ZvB"/>
                         <outlet property="textField" destination="P5e-gX-RAV" id="m2P-pv-OHz"/>
-                        <segue destination="aSl-Pk-hhW" kind="presentation" identifier="segueToList" modalPresentationStyle="currentContext" modalTransitionStyle="flipHorizontal" id="fNC-dn-uVM"/>
+                        <segue destination="aSl-Pk-hhW" kind="presentation" identifier="segueToList" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="fNC-dn-uVM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PGD-yk-VUa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -356,6 +356,7 @@
                             </tableView>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="ftr-KC-2uM">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem title="Recipes List" id="bRf-cA-6hL">
                                         <barButtonItem key="backBarButtonItem" title="Back" id="Z4H-ph-ssz"/>
@@ -372,7 +373,7 @@
                                 </connections>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" red="0.076768197119235992" green="0.076862581074237823" blue="0.076782830059528351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.16282719373703003" green="0.16298320889472961" blue="0.16285133361816406" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Lip-Ow-sVK" firstAttribute="leading" secondItem="iCV-uY-0bl" secondAttribute="leading" id="6t7-By-JEc"/>
                             <constraint firstItem="ftr-KC-2uM" firstAttribute="leading" secondItem="iCV-uY-0bl" secondAttribute="leading" id="DsT-vk-inn"/>
@@ -510,13 +511,13 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYg-Ie-DSF">
-                                <rect key="frame" x="16" y="311" width="343" height="309"/>
+                                <rect key="frame" x="16" y="311" width="343" height="260"/>
                                 <color key="textColor" red="0.99963909390000005" green="1" blue="0.99975615740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCX-Go-YRc">
-                                <rect key="frame" x="136" y="628" width="103" height="30"/>
+                                <rect key="frame" x="136" y="579" width="103" height="30"/>
                                 <color key="backgroundColor" red="0.34956651929999999" green="0.57533246280000006" blue="0.38428491349999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="KCX-Go-YRc" secondAttribute="height" multiplier="151:44" id="bEZ-49-8PL"/>
@@ -524,6 +525,9 @@
                                 <state key="normal" title="Get Directions">
                                     <color key="titleColor" red="0.99963909390000005" green="1" blue="0.99975615740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapeGetDirectionsButton:" destination="Sg5-FT-xzX" eventType="touchUpInside" id="Sd4-UO-4Gf"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="CWs-um-zjq">
                                 <rect key="frame" x="0.0" y="17" width="375" height="44"/>
@@ -637,7 +641,7 @@
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qmt-kb-LWh">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" red="0.32877659799999998" green="0.329051435" blue="0.32881915569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.34983664751052856" green="0.35012659430503845" blue="0.34988158941268921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeFavCell" rowHeight="135" id="qeo-2r-YG4" customClass="FavorisTableViewCell" customModule="BonsPetitsPlats" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="135"/>
@@ -690,7 +694,7 @@
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="0.66562587022781372" green="0.6661420464515686" blue="0.66570580005645752" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="63" id="04q-s0-Nki"/>
                                                         <constraint firstItem="kfw-0X-buv" firstAttribute="leading" secondItem="crP-fY-VH8" secondAttribute="leading" constant="4" id="113-cI-6th"/>
@@ -765,7 +769,7 @@
                                             <outlet property="ingredients" destination="Z8f-Xr-gfW" id="0gg-pz-KI3"/>
                                             <outlet property="like" destination="uhu-JG-zI2" id="7gr-7B-sC2"/>
                                             <outlet property="name" destination="WT4-Kz-pAv" id="pTI-Y8-x26"/>
-                                            <segue destination="Sg5-FT-xzX" kind="presentation" identifier="segueToDetails" trigger="accessoryAction" modalPresentationStyle="currentContext" modalTransitionStyle="flipHorizontal" id="OMT-0U-52j"/>
+                                            <segue destination="Sg5-FT-xzX" kind="presentation" identifier="segueToDetails" trigger="accessoryAction" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="OMT-0U-52j"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -808,6 +812,6 @@
         <image name="WhiteFavoriteAdd" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oeq-8K-AZg"/>
+        <segue reference="OMT-0U-52j"/>
     </inferredMetricsTieBreakers>
 </document>

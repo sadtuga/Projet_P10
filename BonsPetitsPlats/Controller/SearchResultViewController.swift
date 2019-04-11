@@ -22,11 +22,13 @@ class SearchResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         if listDetails != nil {
             refreshSreen(like: listDetails!.rating, duration: listDetails!.totalTimeInSeconds, name: listDetails!.recipeName)
             makeIngredientList(test: listDetails!.ingredients)
-        }
-        if favListDetails != nil {
+        }else if favListDetails != nil {
             refreshSreen(like:Int(favListDetails!.rate), duration: Int(favListDetails!.time), name: favListDetails!.name!)
             makeIngredientList(test: favListDetails!.ingredients!)
         }
@@ -35,6 +37,7 @@ class SearchResultViewController: UIViewController {
     @IBAction func addToFavorite(_ sender: Any) {
         let recipeDedails = RecipeP(context: AppDelegate.viewContext)
         recipeDedails.name = name.text
+        recipeDedails.id = listDetails?.id
         recipeDedails.rate = Int64(like.text!)!
         recipeDedails.time = Int64(duration.text!)!
         recipeDedails.image = nil
@@ -44,6 +47,15 @@ class SearchResultViewController: UIViewController {
     
     @IBAction func dismiss() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func didTapeGetDirectionsButton(_ sender: Any) {
+        if let id = favListDetails?.id {
+            print(id)
+            guard let url = URL(string: "https://www.yummly.com/recipe/" + id) else { return }
+            UIApplication.shared.open(url)
+        }
+        
     }
     
     private func refreshSreen(like: Int, duration: Int, name: String) {
@@ -62,4 +74,5 @@ class SearchResultViewController: UIViewController {
     private func makeIngredientList(test: String) {
         ingredientList.text = favListDetails?.ingredients
     }
+ 
 }
