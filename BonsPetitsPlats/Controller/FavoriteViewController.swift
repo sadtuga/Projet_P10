@@ -22,6 +22,7 @@ class FavoriteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         recipeList = RecipeP.all
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

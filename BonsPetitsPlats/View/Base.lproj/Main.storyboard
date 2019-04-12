@@ -511,13 +511,13 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYg-Ie-DSF">
-                                <rect key="frame" x="16" y="311" width="343" height="260"/>
+                                <rect key="frame" x="16" y="311" width="343" height="309"/>
                                 <color key="textColor" red="0.99963909390000005" green="1" blue="0.99975615740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCX-Go-YRc">
-                                <rect key="frame" x="136" y="579" width="103" height="30"/>
+                                <rect key="frame" x="136" y="628" width="103" height="30"/>
                                 <color key="backgroundColor" red="0.34956651929999999" green="0.57533246280000006" blue="0.38428491349999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="KCX-Go-YRc" secondAttribute="height" multiplier="151:44" id="bEZ-49-8PL"/>
@@ -812,6 +812,6 @@
         <image name="WhiteFavoriteAdd" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OMT-0U-52j"/>
+        <segue reference="oeq-8K-AZg"/>
     </inferredMetricsTieBreakers>
 </document>

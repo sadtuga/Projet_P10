@@ -77,4 +77,26 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         listDetails = list?.matches[indexPath.row]
         self.performSegue(withIdentifier: "segueToDetails", sender: self)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let add = UIContextualAction(style: .normal, title: "Add Favorites") { (action, view, nil) in
+            let recipeDedails = RecipeP(context: AppDelegate.viewContext)
+            recipeDedails.name = self.list?.matches[indexPath.row].recipeName
+            recipeDedails.id = self.list?.matches[indexPath.row].id
+            recipeDedails.rate = Int64(self.list!.matches[indexPath.row].rating)
+            recipeDedails.time = Int64(self.list!.matches[indexPath.row].totalTimeInSeconds)
+            recipeDedails.image = nil
+            recipeDedails.ingredients = self.makeIngredientList(test: (self.list?.matches[indexPath.row].ingredients)!)
+            try? AppDelegate.viewContext.save()
+        }
+        return UISwipeActionsConfiguration(actions: [add])
+    }
+    
+    private func makeIngredientList(test: [String]) -> String {
+        var string: String = ""
+        for e in test {
+            string += "- " + e + "\n"
+        }
+        return string
+    }
 }
