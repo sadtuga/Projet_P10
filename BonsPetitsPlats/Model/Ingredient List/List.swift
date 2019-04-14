@@ -27,6 +27,10 @@ class List {
         list.removeAll()
     }
     
+    func listCount() -> Int {
+        return list.count
+    }
+    
     func createRequestOption() -> String {
         var option: String = ""
         for e in list {
@@ -40,4 +44,14 @@ class List {
         
         return option
     }
+    
+    func contains(_ text: String) -> Bool {
+        for e in list {
+            if e.name == text {
+                return true
+            }
+        }
+        return false
+    }
+    
 }

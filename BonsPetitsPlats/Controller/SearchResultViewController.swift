@@ -19,6 +19,7 @@ class SearchResultViewController: UIViewController {
     
     var listDetails: Recipe?
     var favListDetails: RecipeP?
+    var recipDetails: Details?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,20 +27,22 @@ class SearchResultViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if listDetails != nil {
-            refreshSreen(like: listDetails!.rating, duration: listDetails!.totalTimeInSeconds, name: listDetails!.recipeName)
             makeIngredientList(test: listDetails!.ingredients)
+            recipDetails = Details(ingredients: ingredientList.text, id: listDetails!.id, smallImageUrls: listDetails!.smallImageUrls, image: nil, recipeName: listDetails!.recipeName, totalTimeInSeconds: listDetails!.totalTimeInSeconds, rating: listDetails!.rating)
+            refreshSreen()
         }else if favListDetails != nil {
-            refreshSreen(like:Int(favListDetails!.rate), duration: Int(favListDetails!.time), name: favListDetails!.name!)
+            recipDetails = Details(ingredients: ingredientList.text, id: favListDetails!.id!, smallImageUrls: nil, image: nil, recipeName: favListDetails!.name!, totalTimeInSeconds: Int(favListDetails!.time), rating: Int(favListDetails!.rate))
+            refreshSreen()
             makeIngredientList(test: favListDetails!.ingredients!)
         }
     }
     
     @IBAction func addToFavorite(_ sender: Any) {
         let recipeDedails = RecipeP(context: AppDelegate.viewContext)
-        recipeDedails.name = name.text
-        recipeDedails.id = listDetails?.id
-        recipeDedails.rate = Int64(like.text!)!
-        recipeDedails.time = Int64(duration.text!)!
+        recipeDedails.name = recipDetails?.recipeName
+        recipeDedails.id = recipDetails?.id
+        recipeDedails.rate = Int64(recipDetails!.rating)
+        recipeDedails.time = Int64(listDetails!.totalTimeInSeconds)
         recipeDedails.image = nil
         recipeDedails.ingredients = ingredientList.text
         try? AppDelegate.viewContext.save()
@@ -50,18 +53,17 @@ class SearchResultViewController: UIViewController {
     }
     
     @IBAction func didTapeGetDirectionsButton(_ sender: Any) {
-        if let id = favListDetails?.id {
-            print(id)
+        if let id = recipDetails?.id {
             guard let url = URL(string: "https://www.yummly.com/recipe/" + id) else { return }
             UIApplication.shared.open(url)
         }
         
     }
     
-    private func refreshSreen(like: Int, duration: Int, name: String) {
-        self.name.text = name
-        self.like.text = String(like)
-        self.duration.text = String(duration)
+    private func refreshSreen() {
+        self.name.text = recipDetails?.recipeName
+        self.like.text = String(recipDetails!.rating)
+        self.duration.text = Convert.convertTime(time: recipDetails!.totalTimeInSeconds)
         self.background = nil
     }
     

@@ -25,7 +25,7 @@ class FavorisTableViewCell: UITableViewCell {
     func configure(name: String, ingredient: String, time: Int, like: Int, background: UIImageView?) {
         self.name.text = name
         self.ingredients.text = ingredient
-        self.duration.text = String(time)
+        self.duration.text = Convert.convertTime(time: time)
         self.like.text = String(like)
     }
 

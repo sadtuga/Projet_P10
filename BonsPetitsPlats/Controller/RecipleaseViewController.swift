@@ -19,12 +19,6 @@ class RecipleaseViewController: UIViewController {
     let yummly = YummlyService()
     var list: RecipeYummly!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -34,7 +28,10 @@ class RecipleaseViewController: UIViewController {
     }
     
     @IBAction func didTapeAddButton(_ sender: Any) {
-        guard textField.text != nil else {
+        guard textField.text != nil, List.shared.contains(textField!.text!) == false else {
+            return
+        }
+        guard textField!.text!.count >= 1 else {
             return
         }
         
@@ -112,6 +109,9 @@ extension RecipleaseViewController: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             List.shared.removeIngredient(index: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            if List.shared.listCount() == 0 {
+                desableClearButton()
+            }
         }
     }
     

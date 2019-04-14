@@ -11,7 +11,8 @@ import Foundation
 struct Details {
     var ingredients: String
     var id: String
-    var smallImageUrls: [String]
+    var smallImageUrls: [String]?
+    var image: Data?
     var recipeName: String
     var totalTimeInSeconds: Int
     var rating: Int

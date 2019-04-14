@@ -22,6 +22,7 @@
 		A0A3A0C5225F9A02005ECD9C /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A3A0C4225F9A02005ECD9C /* Details.swift */; };
 		A0A8BF342247901500496D34 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A8BF332247901500496D34 /* ListTableViewCell.swift */; };
 		A0A8BF362247E47500496D34 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A8BF352247E47500496D34 /* Ingredient.swift */; };
+		A0BD4F5422635BF900F8FBB4 /* Converting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BD4F5322635BF900F8FBB4 /* Converting.swift */; };
 		A0D7C185224924DB0080F144 /* FavorisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D7C184224924DB0080F144 /* FavorisTableViewCell.swift */; };
 		A0E28DC4224BE2A5000DC02F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E28DC3224BE2A5000DC02F /* ListViewController.swift */; };
 		A0E9CFFE224D152F00A5C504 /* RecipesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E9CFFD224D152F00A5C504 /* RecipesListTableViewCell.swift */; };
@@ -63,6 +64,7 @@
 		A0A3A0C4225F9A02005ECD9C /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		A0A8BF332247901500496D34 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		A0A8BF352247E47500496D34 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		A0BD4F5322635BF900F8FBB4 /* Converting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converting.swift; sourceTree = "<group>"; };
 		A0D7C184224924DB0080F144 /* FavorisTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavorisTableViewCell.swift; sourceTree = "<group>"; };
 		A0E28DC3224BE2A5000DC02F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		A0E9CFFD224D152F00A5C504 /* RecipesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListTableViewCell.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				A0D7C18022490D3A0080F144 /* DishList */,
 				A0D7C17F22490A400080F144 /* Ingredient List */,
 				A0A3A0C4225F9A02005ECD9C /* Details.swift */,
+				A0BD4F5322635BF900F8FBB4 /* Converting.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				A0F81654224A8CC6005EE822 /* RecipeYummly.swift in Sources */,
 				A0E28DC4224BE2A5000DC02F /* ListViewController.swift in Sources */,
 				A0A8BF362247E47500496D34 /* Ingredient.swift in Sources */,
+				A0BD4F5422635BF900F8FBB4 /* Converting.swift in Sources */,
 				A0091D6B225CD3B2003A683B /* RecipePlease.xcdatamodeld in Sources */,
 				A02093132236C67E005B7922 /* FavoriteViewController.swift in Sources */,
 				A02093182236CA3C005B7922 /* SearchResultViewController.swift in Sources */,

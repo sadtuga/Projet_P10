@@ -11,12 +11,11 @@ import UIKit
 class RecipesListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var favoritesButton: UIButton!
+    @IBOutlet weak var favorites: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var ingredient: UILabel!
     @IBOutlet weak var like: UILabel!
     @IBOutlet weak var time: UILabel!
-    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,8 +31,8 @@ class RecipesListTableViewCell: UITableViewCell {
     func configure(name: String, ingredient: [String], time: Int, like: Int, background: UIImageView?) {
         self.background = background
         self.like.text = String(like)
-        self.time.text = String(time)
-        self.name.text = name
+        self.time.text = Convert.convertTime(time: time)
+        self.name.text = name.capitalized
         self.ingredient.text = addIngredient(ingredient: ingredient)
     }
     
@@ -49,4 +48,5 @@ class RecipesListTableViewCell: UITableViewCell {
         
         return option
     }
+    
 }
