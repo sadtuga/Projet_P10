@@ -16,6 +16,12 @@ class ListViewController: UIViewController {
     
     var list: RecipeYummly?
     var listDetails: Recipe!
+    var image: UIImage!
+    
+    var yummly = YummlyService()
+    
+    var isFav: Bool = false
+    var tabImage: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +41,7 @@ class ListViewController: UIViewController {
         if segue.identifier == "segueToDetails" {
             let successVC = segue.destination as! SearchResultViewController
             successVC.listDetails = listDetails
+            successVC.image = image
         }
     }
     
@@ -61,20 +68,28 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesCell", for: indexPath) as? RecipesListTableViewCell else {
             return UITableViewCell()
         }
         
         let recipe = list!.matches[indexPath.row]
         
-        cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: nil)
+        yummly.getImage(url: recipe.smallImageUrls[0]) { (succes, image) in
+            cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: image!, isFav: self.isFav)
+            guard image != nil else {
+                return
+            }
+            self.tabImage.append(image!)
+        }
+        
+        isFav = RecipeP.containsRecipe(self.list!.matches[indexPath.row].id)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         listDetails = list?.matches[indexPath.row]
+        image = tabImage[indexPath.row]
         self.performSegue(withIdentifier: "segueToDetails", sender: self)
     }
     

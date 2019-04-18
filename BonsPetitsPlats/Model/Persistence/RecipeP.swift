@@ -18,5 +18,15 @@ class RecipeP: NSManagedObject {
         }
         return recipeList
     }
+    
+    static func containsRecipe(_ element: String) -> Bool {
+        for e in all {
+            if e.id == element {
+                return true
+            }
+        }
+        return false
+    }
+    
 }
 //RecipeP().name

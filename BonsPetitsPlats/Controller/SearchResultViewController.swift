@@ -20,6 +20,9 @@ class SearchResultViewController: UIViewController {
     var listDetails: Recipe?
     var favListDetails: RecipeP?
     var recipDetails: Details?
+    var image: UIImage?
+    
+    var isFav: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +31,12 @@ class SearchResultViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         if listDetails != nil {
             makeIngredientList(test: listDetails!.ingredients)
-            recipDetails = Details(ingredients: ingredientList.text, id: listDetails!.id, smallImageUrls: listDetails!.smallImageUrls, image: nil, recipeName: listDetails!.recipeName, totalTimeInSeconds: listDetails!.totalTimeInSeconds, rating: listDetails!.rating)
+            recipDetails = Details(ingredients: ingredientList.text, id: listDetails!.id, smallImageUrls: listDetails!.smallImageUrls, image: image, recipeName: listDetails!.recipeName, totalTimeInSeconds: listDetails!.totalTimeInSeconds, rating: listDetails!.rating)
+            isFav = RecipeP.containsRecipe(recipDetails!.id)
             refreshSreen()
         }else if favListDetails != nil {
-            recipDetails = Details(ingredients: ingredientList.text, id: favListDetails!.id!, smallImageUrls: nil, image: nil, recipeName: favListDetails!.name!, totalTimeInSeconds: Int(favListDetails!.time), rating: Int(favListDetails!.rate))
+            recipDetails = Details(ingredients: ingredientList.text, id: favListDetails!.id!, smallImageUrls: nil, image: image, recipeName: favListDetails!.name!, totalTimeInSeconds: Int(favListDetails!.time), rating: Int(favListDetails!.rate))
+            isFav = RecipeP.containsRecipe(recipDetails!.id)
             refreshSreen()
             makeIngredientList(test: favListDetails!.ingredients!)
         }
@@ -43,7 +48,8 @@ class SearchResultViewController: UIViewController {
         recipeDedails.id = recipDetails?.id
         recipeDedails.rate = Int64(recipDetails!.rating)
         recipeDedails.time = Int64(listDetails!.totalTimeInSeconds)
-        recipeDedails.image = nil
+        let data = image!.pngData()
+        recipeDedails.image = data
         recipeDedails.ingredients = ingredientList.text
         try? AppDelegate.viewContext.save()
     }
@@ -60,11 +66,20 @@ class SearchResultViewController: UIViewController {
         
     }
     
+    private func modifieFavImage() {
+        if isFav == true {
+            favoriteButton.imageView?.image = #imageLiteral(resourceName: "WhiteFavoriteAdd")
+        } else if isFav == false {
+            favoriteButton.imageView?.image = #imageLiteral(resourceName: "White Favoite")
+        }
+    } 
+    
     private func refreshSreen() {
         self.name.text = recipDetails?.recipeName
         self.like.text = String(recipDetails!.rating)
         self.duration.text = Convert.convertTime(time: recipDetails!.totalTimeInSeconds)
-        self.background = nil
+        self.background.image = recipDetails?.image
+        modifieFavImage()
     }
     
     private func makeIngredientList(test: [String]) {

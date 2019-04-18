@@ -15,6 +15,7 @@ class FavoriteViewController: UIViewController {
     
     var recipeList: [RecipeP]?
     var favListDetails: RecipeP?
+    var image: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class FavoriteViewController: UIViewController {
         if segue.identifier == "segueToDetails" {
             let successVC = segue.destination as! SearchResultViewController
             successVC.favListDetails = favListDetails
+            successVC.image = image
         }
     }
 
@@ -51,14 +53,17 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let test = recipeList![indexPath.row]
-        
-        cell.configure(name: test.name!, ingredient: test.ingredients!, time: Int(test.time), like: Int(test.rate), background: nil)
-        
+        if test.image != nil {
+            let imagetest = UIImage(data: test.image!)
+            cell.configure(name: test.name!, ingredient: test.ingredients!, time: Int(test.time), like: Int(test.rate), background: imagetest)
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         favListDetails = recipeList![indexPath.row]
+        let test = UIImage(data: recipeList![indexPath.row].image!)
+        image = test
         self.performSegue(withIdentifier: "segueToDetails", sender: self)
     }
     

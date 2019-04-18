@@ -28,12 +28,21 @@ class RecipesListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(name: String, ingredient: [String], time: Int, like: Int, background: UIImageView?) {
-        self.background = background
+    func configure(name: String, ingredient: [String], time: Int, like: Int, background: UIImage?, isFav: Bool) {
+        self.background.image = background
         self.like.text = String(like)
         self.time.text = Convert.convertTime(time: time)
         self.name.text = name.capitalized
         self.ingredient.text = addIngredient(ingredient: ingredient)
+        configureFavImage(fav: isFav)
+    }
+    
+    func configureFavImage(fav: Bool) {
+        if fav == true {
+            favorites.image = #imageLiteral(resourceName: "WhiteFavoriteAdd")
+        } else if fav == false {
+            favorites.image = #imageLiteral(resourceName: "White Favoite")
+        }
     }
     
     private func addIngredient(ingredient: [String]) -> String {

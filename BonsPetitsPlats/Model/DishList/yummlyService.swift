@@ -44,4 +44,17 @@ class YummlyService {
         task?.resume()
     }
     
+    func getImage(url: String, imageHandler: @escaping ((Bool, UIImage?) -> ())) {
+        
+        AF.request(url).responseData (completionHandler: { (response) in
+            //debugPrint(response)
+            guard let image = response.data, response.error == nil else {
+                imageHandler(false, nil)
+                return
+            }
+            let imageOut = UIImage(data: image)!
+            imageHandler(true, imageOut)
+        })
+    }
+    
 }
