@@ -75,10 +75,11 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         let recipe = list!.matches[indexPath.row]
         
         yummly.getImage(url: recipe.smallImageUrls[0]) { (succes, image) in
-            cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: image!, isFav: self.isFav)
             guard image != nil else {
                 return
             }
+            cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: image!, isFav: self.isFav)
+            
             self.tabImage.append(image!)
         }
         
@@ -100,8 +101,13 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
             recipeDedails.id = self.list?.matches[indexPath.row].id
             recipeDedails.rate = Int64(self.list!.matches[indexPath.row].rating)
             recipeDedails.time = Int64(self.list!.matches[indexPath.row].totalTimeInSeconds)
-            recipeDedails.image = nil
             recipeDedails.ingredients = self.makeIngredientList(test: (self.list?.matches[indexPath.row].ingredients)!)
+            if self.image != nil {
+                let data = self.image!.pngData()
+                recipeDedails.image = data
+            } else {
+                recipeDedails.image = UIImage(named: "DefaultImage.jpg")?.pngData()
+            }
             try? AppDelegate.viewContext.save()
         }
         return UISwipeActionsConfiguration(actions: [add])

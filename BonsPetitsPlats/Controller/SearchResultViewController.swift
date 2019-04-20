@@ -48,9 +48,12 @@ class SearchResultViewController: UIViewController {
         recipeDedails.id = recipDetails?.id
         recipeDedails.rate = Int64(recipDetails!.rating)
         recipeDedails.time = Int64(listDetails!.totalTimeInSeconds)
+        recipeDedails.ingredients = ingredientList.text
+        /*guard self.image == nil else {
+            return
+        }*/
         let data = image!.pngData()
         recipeDedails.image = data
-        recipeDedails.ingredients = ingredientList.text
         try? AppDelegate.viewContext.save()
     }
     
