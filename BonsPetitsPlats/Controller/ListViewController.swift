@@ -21,7 +21,7 @@ class ListViewController: UIViewController {
     var yummly = YummlyService()
     
     var isFav: Bool = false
-    var tabImage: [UIImage] = []
+    var tabImage: [String:UIImage] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,12 +75,9 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         let recipe = list!.matches[indexPath.row]
         
         yummly.getImage(url: recipe.smallImageUrls[0]) { (succes, image) in
-            guard image != nil else {
-                return
-            }
-            cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: image!, isFav: self.isFav)
+            cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: image, isFav: self.isFav)
             
-            self.tabImage.append(image!)
+            self.tabImage.updateValue(image, forKey: recipe.id)
         }
         
         isFav = RecipeP.containsRecipe(self.list!.matches[indexPath.row].id)
@@ -90,25 +87,14 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         listDetails = list?.matches[indexPath.row]
-        image = tabImage[indexPath.row]
+        image = tabImage[listDetails.id]
         self.performSegue(withIdentifier: "segueToDetails", sender: self)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let add = UIContextualAction(style: .normal, title: "Add Favorites") { (action, view, nil) in
-            let recipeDedails = RecipeP(context: AppDelegate.viewContext)
-            recipeDedails.name = self.list?.matches[indexPath.row].recipeName
-            recipeDedails.id = self.list?.matches[indexPath.row].id
-            recipeDedails.rate = Int64(self.list!.matches[indexPath.row].rating)
-            recipeDedails.time = Int64(self.list!.matches[indexPath.row].totalTimeInSeconds)
-            recipeDedails.ingredients = self.makeIngredientList(test: (self.list?.matches[indexPath.row].ingredients)!)
-            if self.image != nil {
-                let data = self.image!.pngData()
-                recipeDedails.image = data
-            } else {
-                recipeDedails.image = UIImage(named: "DefaultImage.jpg")?.pngData()
-            }
-            try? AppDelegate.viewContext.save()
+            guard let image = self.tabImage[self.list!.matches[indexPath.row].id] else {return}
+            RecipeP.save(recipe: self.list!.matches[indexPath.row], image: image)
         }
         return UISwipeActionsConfiguration(actions: [add])
     }

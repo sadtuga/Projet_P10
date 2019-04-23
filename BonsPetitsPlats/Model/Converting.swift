@@ -25,4 +25,13 @@ class Convert {
         return String(time / 60) + "m"
     }
     
+    static func makeIngredientLine(text: [String]) -> String {
+        var string: String = ""
+        for e in text {
+            string += ", " + e
+        }
+        string.removeFirst()
+        return string
+    }
+    
 }

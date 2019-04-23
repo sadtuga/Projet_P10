@@ -57,14 +57,9 @@ class RecipleaseViewController: UIViewController {
             return
         }
         
-        yummly.getReciteList(option: option) { (succes, recipe) in
-            if succes == true {
-                self.list = recipe
-                self.performSegue(withIdentifier: "segueToList", sender: self)
-            } else if succes == false {
-                return
-            }
-            
+        yummly.getReciteList(text: option) { (succes, recites) in
+            self.list = recites
+            self.performSegue(withIdentifier: "segueToList", sender: self)
         }
     }
     

@@ -43,18 +43,8 @@ class SearchResultViewController: UIViewController {
     }
     
     @IBAction func addToFavorite(_ sender: Any) {
-        let recipeDedails = RecipeP(context: AppDelegate.viewContext)
-        recipeDedails.name = recipDetails?.recipeName
-        recipeDedails.id = recipDetails?.id
-        recipeDedails.rate = Int64(recipDetails!.rating)
-        recipeDedails.time = Int64(listDetails!.totalTimeInSeconds)
-        recipeDedails.ingredients = ingredientList.text
-        /*guard self.image == nil else {
-            return
-        }*/
-        let data = image!.pngData()
-        recipeDedails.image = data
-        try? AppDelegate.viewContext.save()
+        guard let image = self.image else {return}
+        RecipeP.save(recipe: recipDetails!, image: image)
     }
     
     @IBAction func dismiss() {
