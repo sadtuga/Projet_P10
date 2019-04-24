@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Convert {
     
@@ -32,6 +33,26 @@ class Convert {
         }
         string.removeFirst()
         return string
+    }
+    
+    static func convertDetail(recipe: Recipe, image: UIImage, ingredient: String) -> Details {
+        let id = recipe.id
+        let url = recipe.smallImageUrls
+        let name = recipe.recipeName
+        let time = recipe.totalTimeInSeconds
+        let rate = recipe.rating
+        
+        return Details(ingredients: ingredient, id: id, smallImageUrls: url, image: image, recipeName: name, totalTimeInSeconds: time, rating: rate)
+    }
+    
+    static func convertDetail(recipe: RecipeP, image: UIImage, ingredient: String) -> Details {
+        let id = recipe.id!
+        //let url = recipe.url
+        let name = recipe.name
+        let time = recipe.time
+        let rate = recipe.rate
+        
+        return Details(ingredients: ingredient, id: id, smallImageUrls: nil, image: image, recipeName: name!, totalTimeInSeconds: Int(time), rating: Int(rate))
     }
     
 }

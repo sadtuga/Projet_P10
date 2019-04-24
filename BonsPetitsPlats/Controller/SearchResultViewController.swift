@@ -30,21 +30,37 @@ class SearchResultViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if listDetails != nil {
-            makeIngredientList(test: listDetails!.ingredients)
-            recipDetails = Details(ingredients: ingredientList.text, id: listDetails!.id, smallImageUrls: listDetails!.smallImageUrls, image: image, recipeName: listDetails!.recipeName, totalTimeInSeconds: listDetails!.totalTimeInSeconds, rating: listDetails!.rating)
-            isFav = RecipeP.containsRecipe(recipDetails!.id)
+            guard let list = listDetails?.ingredients else {return}
+            guard let imageTemp = image else {return}
+            let ingredient = makeIngredientList(text: list)
+            recipDetails = Convert.convertDetail(recipe: listDetails!, image: imageTemp, ingredient: ingredient)
+            guard let id = recipDetails?.id else {return}
+            isFav = RecipeP.containsRecipe(id)
             refreshSreen()
         }else if favListDetails != nil {
-            recipDetails = Details(ingredients: ingredientList.text, id: favListDetails!.id!, smallImageUrls: nil, image: image, recipeName: favListDetails!.name!, totalTimeInSeconds: Int(favListDetails!.time), rating: Int(favListDetails!.rate))
-            isFav = RecipeP.containsRecipe(recipDetails!.id)
+            guard let list = favListDetails?.ingredients! else {return}
+            guard let imageTemp = image else {return}
+            let ingredient = makeIngredientList(text: list)
+            recipDetails = Convert.convertDetail(recipe: favListDetails!, image: imageTemp, ingredient: ingredient)
+            guard let id = recipDetails?.id else {return}
+            isFav = RecipeP.containsRecipe(id)
             refreshSreen()
-            makeIngredientList(test: favListDetails!.ingredients!)
         }
     }
     
     @IBAction func addToFavorite(_ sender: Any) {
-        guard let image = self.image else {return}
-        RecipeP.save(recipe: recipDetails!, image: image)
+        if isFav == false {
+            guard let image = self.image else {return}
+            guard let recipe = recipDetails else {return}
+            RecipeP.save(recipe: recipe, image: image)
+            isFav = true
+        } else if isFav == true {
+            guard let id = recipDetails?.id else {return}
+            let index = RecipeP.returnIndex(id: id)
+            AppDelegate.viewContext.delete(RecipeP.all[index])
+            try? AppDelegate.viewContext.save()
+            isFav = false
+        }
     }
     
     @IBAction func dismiss() {
@@ -52,11 +68,10 @@ class SearchResultViewController: UIViewController {
     }
     
     @IBAction func didTapeGetDirectionsButton(_ sender: Any) {
-        if let id = recipDetails?.id {
-            guard let url = URL(string: "https://www.yummly.com/recipe/" + id) else { return }
-            UIApplication.shared.open(url)
-        }
+        guard let id = recipDetails?.id else {return}
+        guard let url = URL(string: "https://www.yummly.com/recipe/" + id) else { return }
         
+        UIApplication.shared.open(url)
     }
     
     private func modifieFavImage() {
@@ -68,17 +83,31 @@ class SearchResultViewController: UIViewController {
     } 
     
     private func refreshSreen() {
-        self.name.text = recipDetails?.recipeName
-        self.like.text = String(recipDetails!.rating)
-        self.duration.text = Convert.convertTime(time: recipDetails!.totalTimeInSeconds)
-        self.background.image = recipDetails?.image
+        guard let name = recipDetails?.recipeName else {return}
+        guard let like = recipDetails?.rating else {return}
+        guard let time = recipDetails?.totalTimeInSeconds else {return}
+        guard let image = recipDetails?.image else {return}
+        guard let ingredients = recipDetails?.ingredients else {return}
+        
+        self.name.text = name
+        self.like.text = String(like)
+        self.duration.text = Convert.convertTime(time: time)
+        self.background.image = image
+        ingredientList.text = ingredients
         modifieFavImage()
     }
     
-    private func makeIngredientList(test: [String]) {
-        for e in test {
-            ingredientList.text += "- " + e + "\n"
+    private func makeIngredientList(text: [String]) -> String {
+        var list = ""
+        for e in text {
+            list += "- " + e + "\n"
         }
+        return list
+    }
+    
+    private func makeIngredientList(text: String) -> String {
+        text.replacingOccurrences(of: ",", with: "\n- ")
+        return text
     }
     
     private func makeIngredientList(test: String) {

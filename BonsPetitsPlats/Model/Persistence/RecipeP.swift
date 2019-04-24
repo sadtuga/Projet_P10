@@ -29,7 +29,19 @@ class RecipeP: NSManagedObject {
         return false
     }
     
+    static func returnIndex(id: String) -> Int {
+        var index = 0
+        for e in all {
+            if e.id == id {
+                return index
+            }
+            index += 1
+        }
+        return index
+    }
+    
     static func save(recipe: Recipe, image: UIImage) {
+        guard containsRecipe(recipe.id) == false else {return}
         let recipeDedails = RecipeP(context: AppDelegate.viewContext)
         recipeDedails.name = recipe.recipeName
         recipeDedails.id = recipe.id
@@ -42,6 +54,7 @@ class RecipeP: NSManagedObject {
     }
     
     static func save(recipe: Details, image: UIImage) {
+        guard containsRecipe(recipe.id) == false else {return}
         let recipeDedails = RecipeP(context: AppDelegate.viewContext)
         recipeDedails.name = recipe.recipeName
         recipeDedails.id = recipe.id

@@ -34,7 +34,6 @@ class RecipesListTableViewCell: UITableViewCell {
         self.time.text = Convert.convertTime(time: time)
         self.name.text = name.capitalized
         self.ingredient.text = addIngredient(ingredient: ingredient)
-        configureFavImage(fav: isFav)
     }
     
     func configureFavImage(fav: Bool) {

@@ -61,9 +61,10 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        favListDetails = recipeList![indexPath.row]
-        let test = UIImage(data: recipeList![indexPath.row].image!)
-        image = test
+        guard let recipe = recipeList?[indexPath.row] else {return}
+        guard let imageTemp = UIImage(data: recipeList![indexPath.row].image!) else {return}
+        favListDetails = recipe
+        image = imageTemp
         self.performSegue(withIdentifier: "segueToDetails", sender: self)
     }
     

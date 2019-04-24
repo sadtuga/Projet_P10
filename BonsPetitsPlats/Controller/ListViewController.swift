@@ -58,13 +58,15 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if list?.matches.count == 0 || list == nil {
+        guard let count = list?.matches.count else {return 0}
+        
+        if count == 0 || list == nil {
             result.isHidden = false
             activityIndicator.isHidden = true
             return 0
         }
         activityIndicator.isHidden = true
-        return (list?.matches.count)!
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,21 +74,28 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
-        let recipe = list!.matches[indexPath.row]
+        guard let recipe = list?.matches[indexPath.row] else {return UITableViewCell()}
+        guard let id = self.list?.matches[indexPath.row].id else {return UITableViewCell()}
         
-        yummly.getImage(url: recipe.smallImageUrls[0]) { (succes, image) in
-            cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: image, isFav: self.isFav)
-            
-            self.tabImage.updateValue(image, forKey: recipe.id)
+        isFav = RecipeP.containsRecipe(id)
+        
+        if tabImage.count < (list?.matches.count)! {
+            yummly.getImage(url: recipe.smallImageUrls[0]) { (succes, image) in
+                cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: image, isFav: self.isFav)
+                
+                self.tabImage.updateValue(image, forKey: recipe.id)
+            }
+        } else {
+            guard let background = tabImage[recipe.id] else {return UITableViewCell()}
+            cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: background, isFav: self.isFav)
         }
-        
-        isFav = RecipeP.containsRecipe(self.list!.matches[indexPath.row].id)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        listDetails = list?.matches[indexPath.row]
+        guard let recipe = list?.matches[indexPath.row] else {return}
+        listDetails = recipe
         image = tabImage[listDetails.id]
         self.performSegue(withIdentifier: "segueToDetails", sender: self)
     }
@@ -94,16 +103,20 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let add = UIContextualAction(style: .normal, title: "Add Favorites") { (action, view, nil) in
             guard let image = self.tabImage[self.list!.matches[indexPath.row].id] else {return}
-            RecipeP.save(recipe: self.list!.matches[indexPath.row], image: image)
+            guard let recipe = self.list?.matches[indexPath.row] else {return}
+            RecipeP.save(recipe: recipe, image: image)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesCell", for: indexPath) as? RecipesListTableViewCell else {return}
+            cell.configureFavImage(fav: true)
         }
         return UISwipeActionsConfiguration(actions: [add])
     }
     
-    private func makeIngredientList(test: [String]) -> String {
+    private func makeIngredientList(text: [String]) -> String {
         var string: String = ""
-        for e in test {
+        for e in text {
             string += "- " + e + "\n"
         }
         return string
     }
+    
 }
