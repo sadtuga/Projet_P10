@@ -22,12 +22,13 @@ class FavorisTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func configure(name: String, ingredient: String, time: Int, like: Int, background: UIImage?) {
+    func configure(name: String, ingredient: String, time: String, like: Int, background: UIImage?) {
         self.name.text = name
         self.ingredients.text = ingredient
-        self.duration.text = Convert.convertTime(time: time)
+        self.duration.text = time
         self.like.text = String(like)
         self.background.image = background
     }
+    
 
 }

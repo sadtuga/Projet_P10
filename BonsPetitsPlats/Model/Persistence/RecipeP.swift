@@ -49,7 +49,7 @@ class RecipeP: NSManagedObject {
         recipeDedails.time = Int64(recipe.totalTimeInSeconds)
         let data = image.pngData()
         recipeDedails.image = data
-        recipeDedails.ingredients = Convert.makeIngredientLine(text: recipe.ingredients)
+        recipeDedails.ingredients = Convert.makeIngredientList(text: recipe.ingredients)
         try? AppDelegate.viewContext.save()
     }
     
@@ -65,7 +65,6 @@ class RecipeP: NSManagedObject {
         recipeDedails.ingredients = recipe.ingredients
         try? AppDelegate.viewContext.save()
     }
-
     
 }
 //RecipeP().name

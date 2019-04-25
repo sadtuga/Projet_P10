@@ -35,6 +35,27 @@ class Convert {
         return string
     }
     
+    static func makeIngredientLine(text: String) -> String {
+        var line = text
+        line = line.replacingOccurrences(of: "-", with: ",")
+        line = line.replacingOccurrences(of: "\n", with: "")
+        line.removeFirst()
+        return line
+    }
+    
+    static func makeIngredientList(text: [String]) -> String {
+        var list = ""
+        for e in text {
+            list += "- " + e + "\n"
+        }
+        return list
+    }
+    
+    static func makeIngredientList(text: String) -> String {
+        let list = text
+        return list.replacingOccurrences(of: ", ", with: "\n- ")
+    }
+    
     static func convertDetail(recipe: Recipe, image: UIImage, ingredient: String) -> Details {
         let id = recipe.id
         let url = recipe.smallImageUrls

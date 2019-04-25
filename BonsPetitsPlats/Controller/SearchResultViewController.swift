@@ -32,7 +32,7 @@ class SearchResultViewController: UIViewController {
         if listDetails != nil {
             guard let list = listDetails?.ingredients else {return}
             guard let imageTemp = image else {return}
-            let ingredient = makeIngredientList(text: list)
+            let ingredient = Convert.makeIngredientList(text: list)
             recipDetails = Convert.convertDetail(recipe: listDetails!, image: imageTemp, ingredient: ingredient)
             guard let id = recipDetails?.id else {return}
             isFav = RecipeP.containsRecipe(id)
@@ -40,7 +40,7 @@ class SearchResultViewController: UIViewController {
         }else if favListDetails != nil {
             guard let list = favListDetails?.ingredients! else {return}
             guard let imageTemp = image else {return}
-            let ingredient = makeIngredientList(text: list)
+            let ingredient = Convert.makeIngredientList(text: list)
             recipDetails = Convert.convertDetail(recipe: favListDetails!, image: imageTemp, ingredient: ingredient)
             guard let id = recipDetails?.id else {return}
             isFav = RecipeP.containsRecipe(id)
@@ -95,23 +95,6 @@ class SearchResultViewController: UIViewController {
         self.background.image = image
         ingredientList.text = ingredients
         modifieFavImage()
-    }
-    
-    private func makeIngredientList(text: [String]) -> String {
-        var list = ""
-        for e in text {
-            list += "- " + e + "\n"
-        }
-        return list
-    }
-    
-    private func makeIngredientList(text: String) -> String {
-        text.replacingOccurrences(of: ",", with: "\n- ")
-        return text
-    }
-    
-    private func makeIngredientList(test: String) {
-        ingredientList.text = favListDetails?.ingredients
     }
  
 }

@@ -766,7 +766,7 @@
                                             <outlet property="ingredients" destination="Z8f-Xr-gfW" id="0gg-pz-KI3"/>
                                             <outlet property="like" destination="uhu-JG-zI2" id="7gr-7B-sC2"/>
                                             <outlet property="name" destination="WT4-Kz-pAv" id="pTI-Y8-x26"/>
-                                            <segue destination="Sg5-FT-xzX" kind="presentation" identifier="segueToDetails" trigger="accessoryAction" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="OMT-0U-52j"/>
+                                            <segue destination="Sg5-FT-xzX" kind="presentation" identifier="segueToDetails" trigger="accessoryAction" modalTransitionStyle="coverVertical" id="OMT-0U-52j"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -78,16 +78,17 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let id = self.list?.matches[indexPath.row].id else {return UITableViewCell()}
         
         isFav = RecipeP.containsRecipe(id)
+        let ingredient = Convert.makeIngredientLine(text: recipe.ingredients)
         
         if tabImage.count < (list?.matches.count)! {
             yummly.getImage(url: recipe.smallImageUrls[0]) { (succes, image) in
-                cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: image, isFav: self.isFav)
+                cell.configure(name: recipe.recipeName, ingredient: ingredient, time: recipe.totalTimeInSeconds, like: recipe.rating, background: image, isFav: self.isFav)
                 
                 self.tabImage.updateValue(image, forKey: recipe.id)
             }
         } else {
             guard let background = tabImage[recipe.id] else {return UITableViewCell()}
-            cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: recipe.totalTimeInSeconds, like: recipe.rating, background: background, isFav: self.isFav)
+            cell.configure(name: recipe.recipeName, ingredient: ingredient, time: recipe.totalTimeInSeconds, like: recipe.rating, background: background, isFav: self.isFav)
         }
         
         return cell
@@ -109,14 +110,6 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
             cell.configureFavImage(fav: true)
         }
         return UISwipeActionsConfiguration(actions: [add])
-    }
-    
-    private func makeIngredientList(text: [String]) -> String {
-        var string: String = ""
-        for e in text {
-            string += "- " + e + "\n"
-        }
-        return string
     }
     
 }

@@ -52,11 +52,16 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
-        let test = recipeList![indexPath.row]
-        if test.image != nil {
-            let imagetest = UIImage(data: test.image!)
-            cell.configure(name: test.name!, ingredient: test.ingredients!, time: Int(test.time), like: Int(test.rate), background: imagetest)
-        }
+        guard let recipe = recipeList?[indexPath.row] else {return UITableViewCell()}
+        guard let image = recipe.image else {return UITableViewCell()}
+        guard let ingredient = recipe.ingredients else {return UITableViewCell()}
+        
+        let background = UIImage(data: image)
+        let time = Convert.convertTime(time: Int(recipe.time))
+        let ingredientList = Convert.makeIngredientLine(text: ingredient)
+        
+        cell.configure(name: recipe.name!, ingredient: ingredientList, time: time, like: Int(recipe.rate), background: background)
+        
         return cell
     }
     
