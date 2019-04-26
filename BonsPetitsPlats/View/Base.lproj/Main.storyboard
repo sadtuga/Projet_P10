@@ -481,11 +481,10 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYl-wF-bRj">
-                                        <rect key="frame" x="110" y="179" width="155" height="21"/>
+                                        <rect key="frame" x="165" y="179" width="45" height="21"/>
                                         <color key="backgroundColor" red="0.34956651929999999" green="0.57533246280000006" blue="0.38428491349999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="QsB-R3-l2E"/>
-                                            <constraint firstAttribute="width" secondItem="lYl-wF-bRj" secondAttribute="height" multiplier="199:27" id="nSQ-HY-jlH"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.99963909390000005" green="1" blue="0.99975615740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

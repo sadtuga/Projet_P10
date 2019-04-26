@@ -43,7 +43,8 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeList!.count
+        guard let count = recipeList?.count else {return 0}
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,19 +56,21 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
         guard let recipe = recipeList?[indexPath.row] else {return UITableViewCell()}
         guard let image = recipe.image else {return UITableViewCell()}
         guard let ingredient = recipe.ingredients else {return UITableViewCell()}
+        guard let name = recipe.name else {return UITableViewCell()}
         
+        let like = Int(recipe.rate)
         let background = UIImage(data: image)
         let time = Convert.convertTime(time: Int(recipe.time))
         let ingredientList = Convert.makeIngredientLine(text: ingredient)
         
-        cell.configure(name: recipe.name!, ingredient: ingredientList, time: time, like: Int(recipe.rate), background: background)
+        cell.configure(name: name, ingredient: ingredientList, time: time, like: like, background: background)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let recipe = recipeList?[indexPath.row] else {return}
-        guard let imageTemp = UIImage(data: recipeList![indexPath.row].image!) else {return}
+        guard let imageTemp = UIImage(data: (recipeList?[indexPath.row].image)!) else {return}
         favListDetails = recipe
         image = imageTemp
         self.performSegue(withIdentifier: "segueToDetails", sender: self)

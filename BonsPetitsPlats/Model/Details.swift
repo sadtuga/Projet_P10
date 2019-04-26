@@ -12,7 +12,7 @@ import UIKit
 struct Details {
     var ingredients: String
     var id: String
-    var smallImageUrls: [String]?
+    var smallImageUrls: String?
     var image: UIImage?
     var recipeName: String
     var totalTimeInSeconds: Int

@@ -37,11 +37,12 @@ class SearchResultViewController: UIViewController {
             guard let id = recipDetails?.id else {return}
             isFav = RecipeP.containsRecipe(id)
             refreshSreen()
-        }else if favListDetails != nil {
-            guard let list = favListDetails?.ingredients! else {return}
+        } else if favListDetails != nil {
+            guard let list = favListDetails?.ingredients else {return}
             guard let imageTemp = image else {return}
             let ingredient = Convert.makeIngredientList(text: list)
-            recipDetails = Convert.convertDetail(recipe: favListDetails!, image: imageTemp, ingredient: ingredient)
+            guard let recipe = Convert.convertDetail(recipe: favListDetails!, image: imageTemp, ingredient: ingredient) else {return}
+            recipDetails = recipe
             guard let id = recipDetails?.id else {return}
             isFav = RecipeP.containsRecipe(id)
             refreshSreen()
@@ -54,12 +55,14 @@ class SearchResultViewController: UIViewController {
             guard let recipe = recipDetails else {return}
             RecipeP.save(recipe: recipe, image: image)
             isFav = true
-        } else if isFav == true {
+            modifieFavImage()
+        } else {
             guard let id = recipDetails?.id else {return}
             let index = RecipeP.returnIndex(id: id)
             AppDelegate.viewContext.delete(RecipeP.all[index])
             try? AppDelegate.viewContext.save()
             isFav = false
+            modifieFavImage()
         }
     }
     
@@ -76,9 +79,9 @@ class SearchResultViewController: UIViewController {
     
     private func modifieFavImage() {
         if isFav == true {
-            favoriteButton.imageView?.image = #imageLiteral(resourceName: "WhiteFavoriteAdd")
+            favoriteButton.setImage(#imageLiteral(resourceName: "WhiteFavoriteAdd"), for: UIControl.State.normal)
         } else if isFav == false {
-            favoriteButton.imageView?.image = #imageLiteral(resourceName: "White Favoite")
+            favoriteButton.setImage(#imageLiteral(resourceName: "White Favoite"), for: UIControl.State.normal)
         }
     } 
     

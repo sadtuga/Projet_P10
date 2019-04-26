@@ -20,7 +20,7 @@ class ListViewController: UIViewController {
     
     var yummly = YummlyService()
     
-    var isFav: Bool = false
+    
     var tabImage: [String:UIImage] = [:]
     
     override func viewDidLoad() {
@@ -74,21 +74,25 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
+        var isFav: Bool = false
+        
         guard let recipe = list?.matches[indexPath.row] else {return UITableViewCell()}
         guard let id = self.list?.matches[indexPath.row].id else {return UITableViewCell()}
+        guard let count = list?.matches.count else {return UITableViewCell()}
         
         isFav = RecipeP.containsRecipe(id)
+        
         let ingredient = Convert.makeIngredientLine(text: recipe.ingredients)
         
-        if tabImage.count < (list?.matches.count)! {
+        if tabImage.count < count {
             yummly.getImage(url: recipe.smallImageUrls[0]) { (succes, image) in
-                cell.configure(name: recipe.recipeName, ingredient: ingredient, time: recipe.totalTimeInSeconds, like: recipe.rating, background: image, isFav: self.isFav)
+                cell.configure(name: recipe.recipeName, ingredient: ingredient, time: recipe.totalTimeInSeconds, like: recipe.rating, background: image, isFav: isFav)
                 
                 self.tabImage.updateValue(image, forKey: recipe.id)
             }
         } else {
             guard let background = tabImage[recipe.id] else {return UITableViewCell()}
-            cell.configure(name: recipe.recipeName, ingredient: ingredient, time: recipe.totalTimeInSeconds, like: recipe.rating, background: background, isFav: self.isFav)
+            cell.configure(name: recipe.recipeName, ingredient: ingredient, time: recipe.totalTimeInSeconds, like: recipe.rating, background: background, isFav: isFav)
         }
         
         return cell
@@ -108,6 +112,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
             RecipeP.save(recipe: recipe, image: image)
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesCell", for: indexPath) as? RecipesListTableViewCell else {return}
             cell.configureFavImage(fav: true)
+            tableView.reloadData()
         }
         return UISwipeActionsConfiguration(actions: [add])
     }
