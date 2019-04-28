@@ -45,8 +45,8 @@ class YummlyService {
     }
     
     func getImage(url: String, imageHandler: @escaping ((Bool, UIImage) -> ())) {
-        
-        AF.request(url).responseData (completionHandler: { (response) in
+        let urlResize = url.replacingOccurrences(of: "=s90", with: "=s200")
+        AF.request(urlResize).responseData (completionHandler: { (response) in
             guard let image = response.data, response.error == nil else {
                 let test = UIImage(named: "DefaultImage.jpg")
                 imageHandler(false, test!)

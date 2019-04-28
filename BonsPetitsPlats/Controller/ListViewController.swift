@@ -45,10 +45,6 @@ class ListViewController: UIViewController {
         }
     }
     
-    @IBAction func dismiss() {
-        dismiss(animated: true, completion: nil)
-    }
-    
 }
 
 extension ListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -81,7 +77,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let count = list?.matches.count else {return UITableViewCell()}
         
         isFav = RecipeP.containsRecipe(id)
-        
+    
         let ingredient = Convert.makeIngredientLine(text: recipe.ingredients)
         
         if tabImage.count < count {

@@ -66,10 +66,6 @@ class SearchResultViewController: UIViewController {
         }
     }
     
-    @IBAction func dismiss() {
-        dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func didTapeGetDirectionsButton(_ sender: Any) {
         guard let id = recipDetails?.id else {return}
         guard let url = URL(string: "https://www.yummly.com/recipe/" + id) else { return }

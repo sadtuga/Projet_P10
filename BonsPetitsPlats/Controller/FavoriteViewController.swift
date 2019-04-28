@@ -12,6 +12,7 @@ import CoreData
 class FavoriteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var favLab: UILabel!
     
     var recipeList: [RecipeP]?
     var favListDetails: RecipeP?
@@ -23,6 +24,14 @@ class FavoriteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         recipeList = RecipeP.all
+        guard let count = recipeList?.count else {return}
+        
+        if count == 0 {
+            favLab.isHidden = false
+            return
+        }
+
+        favLab.isHidden = true
         tableView.reloadData()
     }
     
