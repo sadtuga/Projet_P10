@@ -1,5 +1,5 @@
 //
-//  Details.swift
+//  Recipe.swift
 //  BonsPetitsPlats
 //
 //  Created by Marques Lucas on 11/04/2019.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Details {
+struct Recipe {
     var ingredients: String
     var id: String
     var smallImageUrls: URL?

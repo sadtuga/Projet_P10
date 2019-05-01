@@ -18,7 +18,7 @@ class RecipleaseViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let yummly = YummlyService()
-    var list: [Details]!
+    var list: [Recipe]!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -63,8 +63,8 @@ class RecipleaseViewController: UIViewController {
             activityIndicator.isHidden = true
             return
         }
-        yummly.getReciteList(text: option) { (succes, recites) in
-            self.list = recites
+        yummly.getReciteList(text: option) { (succes, Recipe) in
+            self.list = Recipe
             self.performSegue(withIdentifier: "segueToList", sender: self)
         }
     }

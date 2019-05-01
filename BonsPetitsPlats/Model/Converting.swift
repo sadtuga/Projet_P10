@@ -43,20 +43,4 @@ class Convert {
         return list
     }
     
-    static func makeIngredientList(text: String) -> String {
-        let list = text
-        return list.replacingOccurrences(of: ", ", with: "\n- ")
-    }
-    
-    static func convertDetail(recipe: RecipeP, image: UIImage, ingredient: String) -> Details? {
-        guard let id = recipe.id else {print("CONVERT FAV ID");return nil}
-        guard let name = recipe.name else {print("CONVERT FAV NAME");return nil}
-        //guard let urlString = recipe.url else {print("CONVERT FAV URL");return nil}
-        //guard let url = URL(string: urlString) else {print("CONVERT FAV URLSTRING");return nil}
-        let time = recipe.time
-        let rate = recipe.rate
-        
-        return Details(ingredients: ingredient, id: id, smallImageUrls: nil, image: image, recipeName: name, totalTimeInSeconds: Int(time), rating: Int(rate))
-    }
-    
 }

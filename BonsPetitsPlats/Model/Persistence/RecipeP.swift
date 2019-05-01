@@ -40,7 +40,7 @@ class RecipeP: NSManagedObject {
         return index
     }
     
-    static func save(recipe: Details, image: UIImage) {
+    static func save(recipe: Recipe, image: UIImage) {
         guard containsRecipe(recipe.id) == false else {return}
         let recipeDedails = RecipeP(context: AppDelegate.viewContext)
         recipeDedails.name = recipe.recipeName
@@ -53,7 +53,7 @@ class RecipeP: NSManagedObject {
         try? AppDelegate.viewContext.save()
     }
     
-    static func save(recipe: Details, image: UIImage, recipeIngredient: String) {
+    static func save(recipe: Recipe, image: UIImage, recipeIngredient: String) {
         guard containsRecipe(recipe.id) == false else {return}
         let recipeDedails = RecipeP(context: AppDelegate.viewContext)
         recipeDedails.name = recipe.recipeName

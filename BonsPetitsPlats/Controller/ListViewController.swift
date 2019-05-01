@@ -12,7 +12,7 @@ class ListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var list: [Details]?
+    var list: [Recipe]?
     var recipeIngredient: String?
     var recipeID: String!
     
@@ -63,6 +63,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let recipe = list?[indexPath.row] else {return UITableViewCell()}
         guard let id = self.list?[indexPath.row].id else {return UITableViewCell()}
         guard let count = list?.count else {return UITableViewCell()}
+        //guard let RecipeP(context: AppDelegate.viewContext) else {return}
         
         isFav = RecipeP.containsRecipe(id)
         let ingredient = recipe.ingredients

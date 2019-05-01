@@ -22,7 +22,7 @@ class YummlyService {
     }
     
     // Send a request to the Yummly API and return this response
-    func getReciteList(text: String, callback: @escaping (Bool, [Details]?) -> Void) {
+    func getReciteList(text: String, callback: @escaping (Bool, [Recipe]?) -> Void) {
         task?.cancel()
         let q = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         let url = URL(string: "https://api.yummly.com/v1/api/recipes?_app_id=60663c48&_app_key=8855b3f3dfde11bd74a54030f8017176&q=\(q)")!
@@ -38,15 +38,15 @@ class YummlyService {
         task?.resume()
     }
     
-    private func jsonToRecipeList(data: JSON) -> [Details] {
-        var recipes = [Details]()
+    private func jsonToRecipeList(data: JSON) -> [Recipe] {
+        var recipes = [Recipe]()
         for match in data["matches"].arrayValue {
             recipes.append(updateRecipe(data: match, test: false))
         }
         return recipes
     }
     
-    func detailsRecipe(id: String, callback: @escaping (Bool, Details?) -> Void) {
+    func detailsRecipe(id: String, callback: @escaping (Bool, Recipe?) -> Void) {
         task?.cancel()
         let url = URL(string: "https://api.yummly.com/v1/api/recipe/\(id)?_app_id=60663c48&_app_key=8855b3f3dfde11bd74a54030f8017176")!
         AF.request(url).validate().responseJSON { response in
@@ -60,7 +60,7 @@ class YummlyService {
         task?.resume()
     }
     
-    func updateRecipe(data: JSON, test: Bool) -> Details {
+    func updateRecipe(data: JSON, test: Bool) -> Recipe {
 
         let id = data["id"].stringValue
         let rate = data["rating"].intValue
@@ -78,8 +78,8 @@ class YummlyService {
                 name = data["name"].stringValue
             } else {print("ERREUR URL 1")}
         } else {
-            if let urlTemp = data["smallImageUrls"][0].url {
-                url = urlTemp//.string?.replacingOccurrences(of: "=s90", with: "=s200")
+            if let urlTemp = URL(string: (data["smallImageUrls"][0].string?.replacingOccurrences(of: "=s90", with: ""))!) {
+                url = urlTemp
                 ingredients = data["ingredients"].arrayValue.map{$0.stringValue}
                 ingredientList = Convert.makeIngredientLine(text: ingredients)
                 name = data["recipeName"].stringValue
@@ -87,7 +87,7 @@ class YummlyService {
         }
         
         
-        return Details(ingredients: ingredientList, id: id, smallImageUrls: url, image: nil, recipeName: name, totalTimeInSeconds: time, rating: rate)
+        return Recipe(ingredients: ingredientList, id: id, smallImageUrls: url, image: nil, recipeName: name, totalTimeInSeconds: time, rating: rate)
     }
     
     func getImage(url: URL, imageHandler: @escaping ((Bool, UIImage) -> ())) {

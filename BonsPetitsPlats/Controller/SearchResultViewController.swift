@@ -20,7 +20,7 @@ class SearchResultViewController: UIViewController {
     
     var recipeID: String!
     var recipeIngredient: String!
-    var recipDetails: Details?
+    var recipDetails: Recipe?
     var image: UIImage?
     
     let yummly = YummlyService()
@@ -34,9 +34,9 @@ class SearchResultViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         activityIndicator.isHidden = false
         if recipeID != nil {
-            yummly.detailsRecipe(id: recipeID) { (succes, details) in
-                if let detailsT = details {
-                    self.recipDetails = detailsT
+            yummly.detailsRecipe(id: recipeID) { (succes, recipe) in
+                if let details = recipe {
+                    self.recipDetails = details
                     guard let id = self.recipDetails?.id else {print("ERREUR ID");return}
                     self.isFav = RecipeP.containsRecipe(id)
                     self.refreshSreen()

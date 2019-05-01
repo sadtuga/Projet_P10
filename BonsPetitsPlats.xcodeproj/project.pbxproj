@@ -18,8 +18,10 @@
 		A02093112236C65A005B7922 /* RecipleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02093102236C65A005B7922 /* RecipleaseViewController.swift */; };
 		A02093132236C67E005B7922 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02093122236C67E005B7922 /* FavoriteViewController.swift */; };
 		A02093182236CA3C005B7922 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02093172236CA3C005B7922 /* SearchResultViewController.swift */; };
+		A0307AD8227A13AF00695028 /* ConvertTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0307AD7227A13AF00695028 /* ConvertTestCase.swift */; };
+		A0307ADA227A2CA000695028 /* ListTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0307AD9227A2CA000695028 /* ListTestCase.swift */; };
 		A0708FD4223AC1770036E0A5 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0708FD3223AC1770036E0A5 /* List.swift */; };
-		A0A3A0C5225F9A02005ECD9C /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A3A0C4225F9A02005ECD9C /* Details.swift */; };
+		A0A3A0C5225F9A02005ECD9C /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A3A0C4225F9A02005ECD9C /* Recipe.swift */; };
 		A0A8BF342247901500496D34 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A8BF332247901500496D34 /* ListTableViewCell.swift */; };
 		A0A8BF362247E47500496D34 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A8BF352247E47500496D34 /* Ingredient.swift */; };
 		A0BD4F5422635BF900F8FBB4 /* Converting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BD4F5322635BF900F8FBB4 /* Converting.swift */; };
@@ -59,8 +61,10 @@
 		A02093102236C65A005B7922 /* RecipleaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseViewController.swift; sourceTree = "<group>"; };
 		A02093122236C67E005B7922 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		A02093172236CA3C005B7922 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		A0307AD7227A13AF00695028 /* ConvertTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertTestCase.swift; sourceTree = "<group>"; };
+		A0307AD9227A2CA000695028 /* ListTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTestCase.swift; sourceTree = "<group>"; };
 		A0708FD3223AC1770036E0A5 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
-		A0A3A0C4225F9A02005ECD9C /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
+		A0A3A0C4225F9A02005ECD9C /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		A0A8BF332247901500496D34 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		A0A8BF352247E47500496D34 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		A0BD4F5322635BF900F8FBB4 /* Converting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converting.swift; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				A02092F6223695F3005B7922 /* BonsPetitsPlatsTests.swift */,
+				A0307AD7227A13AF00695028 /* ConvertTestCase.swift */,
+				A0307AD9227A2CA000695028 /* ListTestCase.swift */,
 				A02092F8223695F3005B7922 /* Info.plist */,
 			);
 			path = BonsPetitsPlatsTests;
@@ -150,7 +156,6 @@
 				A07F14E82259ED940071A9F8 /* Persistence */,
 				A0D7C18022490D3A0080F144 /* DishList */,
 				A0D7C17F22490A400080F144 /* Ingredient List */,
-				A0A3A0C4225F9A02005ECD9C /* Details.swift */,
 				A0BD4F5322635BF900F8FBB4 /* Converting.swift */,
 			);
 			path = Model;
@@ -210,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				A0F81651224A7C8E005EE822 /* yummlyService.swift */,
+				A0A3A0C4225F9A02005ECD9C /* Recipe.swift */,
 			);
 			path = DishList;
 			sourceTree = "<group>";
@@ -436,7 +442,7 @@
 				A0091D6B225CD3B2003A683B /* RecipePlease.xcdatamodeld in Sources */,
 				A02093132236C67E005B7922 /* FavoriteViewController.swift in Sources */,
 				A02093182236CA3C005B7922 /* SearchResultViewController.swift in Sources */,
-				A0A3A0C5225F9A02005ECD9C /* Details.swift in Sources */,
+				A0A3A0C5225F9A02005ECD9C /* Recipe.swift in Sources */,
 				A02093112236C65A005B7922 /* RecipleaseViewController.swift in Sources */,
 				A0708FD4223AC1770036E0A5 /* List.swift in Sources */,
 				A0E9CFFE224D152F00A5C504 /* RecipesListTableViewCell.swift in Sources */,
@@ -447,7 +453,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0307ADA227A2CA000695028 /* ListTestCase.swift in Sources */,
 				A02092F7223695F3005B7922 /* BonsPetitsPlatsTests.swift in Sources */,
+				A0307AD8227A13AF00695028 /* ConvertTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
