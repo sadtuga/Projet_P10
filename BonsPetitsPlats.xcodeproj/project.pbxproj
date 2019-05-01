@@ -27,7 +27,6 @@
 		A0E28DC4224BE2A5000DC02F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E28DC3224BE2A5000DC02F /* ListViewController.swift */; };
 		A0E9CFFE224D152F00A5C504 /* RecipesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E9CFFD224D152F00A5C504 /* RecipesListTableViewCell.swift */; };
 		A0F81652224A7C8E005EE822 /* yummlyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F81651224A7C8E005EE822 /* yummlyService.swift */; };
-		A0F81654224A8CC6005EE822 /* RecipeYummly.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F81653224A8CC6005EE822 /* RecipeYummly.swift */; };
 		FE86FE8B200A80B24566E5E6 /* Pods_BonsPetitsPlats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEC3386C17502C073FF1F381 /* Pods_BonsPetitsPlats.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +68,6 @@
 		A0E28DC3224BE2A5000DC02F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		A0E9CFFD224D152F00A5C504 /* RecipesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListTableViewCell.swift; sourceTree = "<group>"; };
 		A0F81651224A7C8E005EE822 /* yummlyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yummlyService.swift; sourceTree = "<group>"; };
-		A0F81653224A8CC6005EE822 /* RecipeYummly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeYummly.swift; sourceTree = "<group>"; };
 		BEB0644EBDBD55BF9D351C03 /* Pods-BonsPetitsPlats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BonsPetitsPlats.debug.xcconfig"; path = "Target Support Files/Pods-BonsPetitsPlats/Pods-BonsPetitsPlats.debug.xcconfig"; sourceTree = "<group>"; };
 		DEC3386C17502C073FF1F381 /* Pods_BonsPetitsPlats.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BonsPetitsPlats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -212,7 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				A0F81651224A7C8E005EE822 /* yummlyService.swift */,
-				A0F81653224A8CC6005EE822 /* RecipeYummly.swift */,
 			);
 			path = DishList;
 			sourceTree = "<group>";
@@ -339,12 +336,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-BonsPetitsPlats/Pods-BonsPetitsPlats-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -361,12 +360,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-BonsPetitsPlatsTests/Pods-BonsPetitsPlatsTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -429,7 +430,6 @@
 				A0091D6D225CDA7A003A683B /* RecipeP.swift in Sources */,
 				A02092E2223695ED005B7922 /* AppDelegate.swift in Sources */,
 				A0D7C185224924DB0080F144 /* FavorisTableViewCell.swift in Sources */,
-				A0F81654224A8CC6005EE822 /* RecipeYummly.swift in Sources */,
 				A0E28DC4224BE2A5000DC02F /* ListViewController.swift in Sources */,
 				A0A8BF362247E47500496D34 /* Ingredient.swift in Sources */,
 				A0BD4F5422635BF900F8FBB4 /* Converting.swift in Sources */,

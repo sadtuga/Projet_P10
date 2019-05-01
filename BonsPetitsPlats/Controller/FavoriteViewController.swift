@@ -15,8 +15,8 @@ class FavoriteViewController: UIViewController {
     @IBOutlet weak var favLab: UILabel!
     
     var recipeList: [RecipeP]?
-    var favListDetails: RecipeP?
-    var image: UIImage!
+    var recipeIngredient: String?
+    var recipeID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,21 +25,23 @@ class FavoriteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         recipeList = RecipeP.all
         guard let count = recipeList?.count else {return}
-        
+        hideMessage(count: count)
+        tableView.reloadData()
+    }
+    
+    private func hideMessage(count: Int) {
         if count == 0 {
             favLab.isHidden = false
             return
         }
-
         favLab.isHidden = true
-        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToDetails" {
             let successVC = segue.destination as! SearchResultViewController
-            successVC.favListDetails = favListDetails
-            successVC.image = image
+            successVC.recipeID = recipeID
+            successVC.recipeIngredient = recipeIngredient
         }
     }
 
@@ -70,18 +72,16 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
         let like = Int(recipe.rate)
         let background = UIImage(data: image)
         let time = Convert.convertTime(time: Int(recipe.time))
-        let ingredientList = Convert.makeIngredientLine(text: ingredient)
         
-        cell.configure(name: name, ingredient: ingredientList, time: time, like: like, background: background)
+        cell.configure(name: name, ingredient: ingredient, time: time, like: like, background: background)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let recipe = recipeList?[indexPath.row] else {return}
-        guard let imageTemp = UIImage(data: (recipeList?[indexPath.row].image)!) else {return}
-        favListDetails = recipe
-        image = imageTemp
+        recipeID = recipe.id
+        recipeIngredient = recipe.ingredients
         self.performSegue(withIdentifier: "segueToDetails", sender: self)
     }
     
@@ -91,6 +91,8 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
             recipeList?.remove(at: indexPath.row)
             try? AppDelegate.viewContext.save()
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            guard let count = recipeList?.count else {return}
+            hideMessage(count: count)
         }
     }
     

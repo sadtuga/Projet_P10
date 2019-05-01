@@ -15,12 +15,17 @@ class RecipleaseViewController: UIViewController {
     @IBOutlet weak var clearButton: UIButton!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let yummly = YummlyService()
-    var list: RecipeYummly!
+    var list: [Details]!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        activityIndicator.isHidden = true
     }
     
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
@@ -52,11 +57,12 @@ class RecipleaseViewController: UIViewController {
     
     @IBAction func didTapeSearchButton(_ sender: Any) {
         let option = List.shared.createRequestOption()
+        activityIndicator.isHidden = false
         
-        guard option != "" else {
+        if option == "" {
+            activityIndicator.isHidden = true
             return
         }
-        
         yummly.getReciteList(text: option) { (succes, recites) in
             self.list = recites
             self.performSegue(withIdentifier: "segueToList", sender: self)

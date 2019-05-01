@@ -16,11 +16,14 @@ class SearchResultViewController: UIViewController {
     @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var ingredientList: UITextView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var listDetails: Recipe?
-    var favListDetails: RecipeP?
+    var recipeID: String!
+    var recipeIngredient: String!
     var recipDetails: Details?
     var image: UIImage?
+    
+    let yummly = YummlyService()
     
     var isFav: Bool = false
 
@@ -29,31 +32,28 @@ class SearchResultViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if listDetails != nil {
-            guard let list = listDetails?.ingredients else {return}
-            guard let imageTemp = image else {return}
-            let ingredient = Convert.makeIngredientList(text: list)
-            recipDetails = Convert.convertDetail(recipe: listDetails!, image: imageTemp, ingredient: ingredient)
-            guard let id = recipDetails?.id else {return}
-            isFav = RecipeP.containsRecipe(id)
-            refreshSreen()
-        } else if favListDetails != nil {
-            guard let list = favListDetails?.ingredients else {return}
-            guard let imageTemp = image else {return}
-            let ingredient = Convert.makeIngredientList(text: list)
-            guard let recipe = Convert.convertDetail(recipe: favListDetails!, image: imageTemp, ingredient: ingredient) else {return}
-            recipDetails = recipe
-            guard let id = recipDetails?.id else {return}
-            isFav = RecipeP.containsRecipe(id)
-            refreshSreen()
+        activityIndicator.isHidden = false
+        if recipeID != nil {
+            yummly.detailsRecipe(id: recipeID) { (succes, details) in
+                if let detailsT = details {
+                    self.recipDetails = detailsT
+                    guard let id = self.recipDetails?.id else {print("ERREUR ID");return}
+                    self.isFav = RecipeP.containsRecipe(id)
+                    self.refreshSreen()
+                    self.activityIndicator.isHidden = true
+                } else {
+                    print("ERREUR DETAILS")
+                }
+            }
         }
     }
     
     @IBAction func addToFavorite(_ sender: Any) {
         if isFav == false {
-            guard let image = self.image else {return}
-            guard let recipe = recipDetails else {return}
-            RecipeP.save(recipe: recipe, image: image)
+            guard let image = self.background.image else {print("ERREUR IMAGE FAV");return}
+            guard let recipe = recipDetails else {print("ERREUR FAV");return}
+            guard let ingredient = recipeIngredient else {print("ERREUR FAV Ingredient");return}
+            RecipeP.save(recipe: recipe, image: image, recipeIngredient: ingredient)
             isFav = true
             modifieFavImage()
         } else {
@@ -79,21 +79,25 @@ class SearchResultViewController: UIViewController {
         } else if isFav == false {
             favoriteButton.setImage(#imageLiteral(resourceName: "White Favoite"), for: UIControl.State.normal)
         }
-    } 
+    }
     
     private func refreshSreen() {
-        guard let name = recipDetails?.recipeName else {return}
-        guard let like = recipDetails?.rating else {return}
-        guard let time = recipDetails?.totalTimeInSeconds else {return}
-        guard let image = recipDetails?.image else {return}
-        guard let ingredients = recipDetails?.ingredients else {return}
-        
-        self.name.text = name
-        self.like.text = String(like)
-        self.duration.text = Convert.convertTime(time: time)
-        self.background.image = image
-        ingredientList.text = ingredients
-        modifieFavImage()
+        guard let url = recipDetails?.smallImageUrls else {print("ERREUR URL GET IMAGE");return}
+        yummly.getImage(url: url) { (succes, image) in
+            
+            guard let name = self.recipDetails?.recipeName else {print("eurreur name");return}
+            guard let like = self.recipDetails?.rating else {print("eurreur like");return}
+            guard let time = self.recipDetails?.totalTimeInSeconds else {print("eurreur time");return}
+            guard let ingredients = self.recipDetails?.ingredients else {print("eurreur ingredient");return}
+            let imageDetails = image
+            
+            self.name.text = name
+            self.like.text = String(like)
+            self.duration.text = Convert.convertTime(time: time)
+            self.background.image = imageDetails
+            self.ingredientList.text = ingredients
+            self.modifieFavImage()
+        }
     }
  
 }

@@ -40,19 +40,6 @@ class RecipeP: NSManagedObject {
         return index
     }
     
-    static func save(recipe: Recipe, image: UIImage) {
-        guard containsRecipe(recipe.id) == false else {return}
-        let recipeDedails = RecipeP(context: AppDelegate.viewContext)
-        recipeDedails.name = recipe.recipeName
-        recipeDedails.id = recipe.id
-        recipeDedails.rate = Int64(recipe.rating)
-        recipeDedails.time = Int64(recipe.totalTimeInSeconds)
-        let data = image.pngData()
-        recipeDedails.image = data
-        recipeDedails.ingredients = Convert.makeIngredientList(text: recipe.ingredients)
-        try? AppDelegate.viewContext.save()
-    }
-    
     static func save(recipe: Details, image: UIImage) {
         guard containsRecipe(recipe.id) == false else {return}
         let recipeDedails = RecipeP(context: AppDelegate.viewContext)
@@ -63,6 +50,19 @@ class RecipeP: NSManagedObject {
         let data = image.pngData()
         recipeDedails.image = data
         recipeDedails.ingredients = recipe.ingredients
+        try? AppDelegate.viewContext.save()
+    }
+    
+    static func save(recipe: Details, image: UIImage, recipeIngredient: String) {
+        guard containsRecipe(recipe.id) == false else {return}
+        let recipeDedails = RecipeP(context: AppDelegate.viewContext)
+        recipeDedails.name = recipe.recipeName
+        recipeDedails.id = recipe.id
+        recipeDedails.rate = Int64(recipe.rating)
+        recipeDedails.time = Int64(recipe.totalTimeInSeconds)
+        let data = image.pngData()
+        recipeDedails.image = data
+        recipeDedails.ingredients = recipeIngredient
         try? AppDelegate.viewContext.save()
     }
     
