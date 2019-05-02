@@ -10,25 +10,43 @@ import XCTest
 @testable import BonsPetitsPlats
 
 class BonsPetitsPlatsTests: XCTestCase {
+    
+    let yummly = YummlyService()
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testSearchRecipesShouldReturnARecipeArray() {
+        let expectation = XCTestExpectation(description: "Wait for request.")
+        
+        yummly.getReciteList(text: "soup") { (succes, recipe) in
+            XCTAssertTrue(succes)
+            XCTAssertNotNil(recipe)
+            expectation.fulfill()
         }
+        
+        wait(for: [expectation], timeout: 5)
+    }
+    
+    func testGetRecipeDetailsShouldUpdateRecipeWithRecipeURL() {
+        let expectation = XCTestExpectation(description: "Wait for request.")
+        
+        yummly.detailsRecipe(id: "Busy-Day-Soup-2553114") { (succes, recipe) in
+            XCTAssertTrue(succes)
+            XCTAssertNotNil(recipe)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 3)
+    }
+    
+    func testGetImageShouldReturnAnImage() {
+        let imageUrl = URL(string: "https://lh3.googleusercontent.com/GIRatm4HOl4_RCQoCEtA4ZKeP8J9G6gi4a7_wYmQUHEmkkKstAno67BzodTEYtW3y6sxpI8JIV0NYoo7RnedRw=s200")!
+        
+        let expectation = XCTestExpectation(description: "Wait for request.")
+        
+        yummly.getImage(url: imageUrl) { (succes, image) in
+            XCTAssertNotNil(image)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 3)
     }
 
 }
