@@ -50,7 +50,11 @@ class RecipeP: NSManagedObject {
         let data = image.pngData()
         recipeDedails.image = data
         recipeDedails.ingredients = recipe.ingredients
-        try? AppDelegate.viewContext.save()
+        do {
+            try AppDelegate.viewContext.save()
+        } catch let error as NSError {
+            print("Detailed recipe saving error: \n \(error) \n User Info Error —> \(error.userInfo)")
+        }
     }
     
     static func save(recipe: Recipe, image: UIImage, recipeIngredient: String) {
@@ -63,7 +67,11 @@ class RecipeP: NSManagedObject {
         let data = image.pngData()
         recipeDedails.image = data
         recipeDedails.ingredients = recipeIngredient
-        try? AppDelegate.viewContext.save()
+        do {
+            try AppDelegate.viewContext.save()
+        } catch let error as NSError {
+            print("Detailed recipe saving error: \n \(error) \n User Info Error —> \(error.userInfo)")
+        }
     }
     
 }

@@ -21,6 +21,7 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createObserver()
         tableView.reloadData()
     }
     
@@ -63,7 +64,6 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let recipe = list?[indexPath.row] else {return UITableViewCell()}
         guard let id = self.list?[indexPath.row].id else {return UITableViewCell()}
         guard let count = list?.count else {return UITableViewCell()}
-        //guard let RecipeP(context: AppDelegate.viewContext) else {return}
         
         isFav = RecipeP.containsRecipe(id)
         let ingredient = recipe.ingredients

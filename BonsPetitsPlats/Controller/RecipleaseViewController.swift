@@ -25,7 +25,7 @@ class RecipleaseViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        activityIndicator.isHidden = true
+        enableButton()
     }
     
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
@@ -57,15 +57,20 @@ class RecipleaseViewController: UIViewController {
     
     @IBAction func didTapeSearchButton(_ sender: Any) {
         let option = List.shared.createRequestOption()
-        activityIndicator.isHidden = false
+        desableButton()
         
         if option == "" {
-            activityIndicator.isHidden = true
+            enableButton()
             return
         }
         yummly.getReciteList(text: option) { (succes, Recipe) in
-            self.list = Recipe
-            self.performSegue(withIdentifier: "segueToList", sender: self)
+            if succes == true {
+                self.list = Recipe
+                self.performSegue(withIdentifier: "segueToList", sender: self)
+            } else {
+                self.networkError()
+                self.enableButton()
+            }
         }
     }
     
@@ -74,6 +79,16 @@ class RecipleaseViewController: UIViewController {
             let successVC = segue.destination as! ListViewController
             successVC.list = list
         }
+    }
+    
+    private func desableButton() {
+        activityIndicator.isHidden = false
+        searchButton.isEnabled = false
+    }
+    
+    private func enableButton() {
+        activityIndicator.isHidden = true
+        searchButton.isEnabled = true
     }
     
     private func activateClearButton() {

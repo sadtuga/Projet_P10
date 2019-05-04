@@ -381,7 +381,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o95-VS-Hlm">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o95-VS-Hlm">
                                 <rect key="frame" x="0.0" y="61" width="375" height="208"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="n1f-ii-U0h">
@@ -487,7 +487,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCX-Go-YRc">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCX-Go-YRc">
                                 <rect key="frame" x="136" y="579" width="103" height="30"/>
                                 <color key="backgroundColor" red="0.34956651929999999" green="0.57533246280000006" blue="0.38428491349999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -500,7 +500,7 @@
                                     <action selector="didTapeGetDirectionsButton:" destination="Sg5-FT-xzX" eventType="touchUpInside" id="Sd4-UO-4Gf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredient :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEj-bB-on3">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredient :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEj-bB-on3">
                                 <rect key="frame" x="16" y="277" width="92" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="2oc-W1-wos"/>
@@ -513,6 +513,13 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="R8Y-3O-Auq">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="La recette n'est pas disponible!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MnK-DN-iPj">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.39124602079391479" green="0.39156565070152283" blue="0.39129555225372314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -539,9 +546,12 @@
                         <outlet property="background" destination="n1f-ii-U0h" id="JTV-j6-Mqj"/>
                         <outlet property="duration" destination="bPc-9c-qlA" id="FUO-lt-Y5Y"/>
                         <outlet property="favoriteButton" destination="gYj-P7-nYk" id="zAe-cv-aeM"/>
+                        <outlet property="getDirectionButton" destination="KCX-Go-YRc" id="n6X-IE-7hR"/>
                         <outlet property="ingredientList" destination="wYg-Ie-DSF" id="J2k-T4-jcm"/>
+                        <outlet property="labelErreur" destination="MnK-DN-iPj" id="nfQ-cn-JcH"/>
                         <outlet property="like" destination="p3B-ub-gNw" id="wV0-0r-v9D"/>
                         <outlet property="name" destination="lYl-wF-bRj" id="6h3-Ve-9A7"/>
+                        <outlet property="viewDetails" destination="o95-VS-Hlm" id="Foo-GV-fjZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cnz-vP-FJ4" userLabel="First Responder" sceneMemberID="firstResponder"/>

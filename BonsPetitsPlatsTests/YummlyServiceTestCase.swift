@@ -9,11 +9,11 @@
 import XCTest
 @testable import BonsPetitsPlats
 
-class BonsPetitsPlatsTests: XCTestCase {
+class YummlyServiceTestCase: XCTestCase {
     
     let yummly = YummlyService()
 
-    func testSearchRecipesShouldReturnARecipeArray() {
+    func testGetRecipesListShouldReturnARecipeArray() {
         let expectation = XCTestExpectation(description: "Wait for request.")
         
         yummly.getReciteList(text: "soup") { (succes, recipe) in
@@ -25,7 +25,7 @@ class BonsPetitsPlatsTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    func testGetRecipeDetailsShouldUpdateRecipeWithRecipeURL() {
+    func testDetailsRecipeShouldReturnARecipeDetails() {
         let expectation = XCTestExpectation(description: "Wait for request.")
         
         yummly.detailsRecipe(id: "Busy-Day-Soup-2553114") { (succes, recipe) in

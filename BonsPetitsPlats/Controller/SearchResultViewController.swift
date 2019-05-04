@@ -10,6 +10,8 @@ import UIKit
 
 class SearchResultViewController: UIViewController {
     
+    @IBOutlet weak var viewDetails: UIView!
+    @IBOutlet weak var getDirectionButton: UIButton!
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var like: UILabel!
@@ -17,6 +19,7 @@ class SearchResultViewController: UIViewController {
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var ingredientList: UITextView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var labelErreur: UILabel!
     
     var recipeID: String!
     var recipeIngredient: String!
@@ -29,22 +32,13 @@ class SearchResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        createObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         activityIndicator.isHidden = false
         if recipeID != nil {
-            yummly.detailsRecipe(id: recipeID) { (succes, recipe) in
-                if let details = recipe {
-                    self.recipDetails = details
-                    guard let id = self.recipDetails?.id else {print("ERREUR ID");return}
-                    self.isFav = RecipeP.containsRecipe(id)
-                    self.refreshSreen()
-                    self.activityIndicator.isHidden = true
-                } else {
-                    print("ERREUR DETAILS")
-                }
-            }
+            getRecipeDetails()
         }
     }
     
@@ -73,12 +67,36 @@ class SearchResultViewController: UIViewController {
         UIApplication.shared.open(url)
     }
     
+    private func getRecipeDetails() {
+        yummly.detailsRecipe(id: recipeID) { (succes, recipe) in
+            if let details = recipe {
+                self.recipDetails = details
+                guard let id = self.recipDetails?.id else {print("ERREUR ID");return}
+                self.isFav = RecipeP.containsRecipe(id)
+                self.refreshSreen()
+                self.activityIndicator.isHidden = true
+            } else {
+                print("ERREUR DETAILS")
+                self.networkError()
+                self.activityIndicator.isHidden = true
+                self.labelErreur.isHidden = false
+                return
+            }
+        }
+    }
+    
     private func modifieFavImage() {
         if isFav == true {
             favoriteButton.setImage(#imageLiteral(resourceName: "WhiteFavoriteAdd"), for: UIControl.State.normal)
         } else if isFav == false {
             favoriteButton.setImage(#imageLiteral(resourceName: "White Favoite"), for: UIControl.State.normal)
         }
+    }
+    
+    private func viewDetail() {
+        viewDetails.isHidden = false
+        ingredientList.isHidden = false
+        getDirectionButton.isHidden = false
     }
     
     private func refreshSreen() {
@@ -97,6 +115,7 @@ class SearchResultViewController: UIViewController {
             self.background.image = imageDetails
             self.ingredientList.text = ingredients
             self.modifieFavImage()
+            self.viewDetail()
         }
     }
  

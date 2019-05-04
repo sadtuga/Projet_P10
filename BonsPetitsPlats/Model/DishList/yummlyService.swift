@@ -12,18 +12,10 @@ import SwiftyJSON
 
 class YummlyService {
     
-    private var yummlySession: URLSession // Stock a URLSessions
-    private var task: URLSessionDataTask? // Stock a URLSessionsDataTask
-    
     var imagedetails: UIImage?
-    
-    init(yummlySession: URLSession = URLSession(configuration: .default)) {
-        self.yummlySession = yummlySession
-    }
     
     // Send a request to the Yummly API and return this response
     func getReciteList(text: String, callback: @escaping (Bool, [Recipe]?) -> Void) {
-        task?.cancel()
         let q = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         let url = URL(string: "https://api.yummly.com/v1/api/recipes?_app_id=60663c48&_app_key=8855b3f3dfde11bd74a54030f8017176&q=\(q)")!
         
@@ -35,7 +27,6 @@ class YummlyService {
             let recipe = self.jsonToRecipeList(data: JSON(data))
             callback(true, recipe)
         }
-        task?.resume()
     }
     
     private func jsonToRecipeList(data: JSON) -> [Recipe] {
@@ -47,7 +38,6 @@ class YummlyService {
     }
     
     func detailsRecipe(id: String, callback: @escaping (Bool, Recipe?) -> Void) {
-        task?.cancel()
         let url = URL(string: "https://api.yummly.com/v1/api/recipe/\(id)?_app_id=60663c48&_app_key=8855b3f3dfde11bd74a54030f8017176")!
         AF.request(url).validate().responseJSON { response in
             guard let data = response.data, response.error == nil else {
@@ -57,7 +47,6 @@ class YummlyService {
             let recipeDetail = self.updateRecipe(data: JSON(data), test: true)
             callback(true, recipeDetail)
         }
-        task?.resume()
     }
     
     func updateRecipe(data: JSON, test: Bool) -> Recipe {

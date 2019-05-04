@@ -14,7 +14,7 @@
 		A02092E7223695ED005B7922 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02092E5223695ED005B7922 /* Main.storyboard */; };
 		A02092E9223695F3005B7922 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02092E8223695F3005B7922 /* Assets.xcassets */; };
 		A02092EC223695F3005B7922 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02092EA223695F3005B7922 /* LaunchScreen.storyboard */; };
-		A02092F7223695F3005B7922 /* BonsPetitsPlatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02092F6223695F3005B7922 /* BonsPetitsPlatsTests.swift */; };
+		A02092F7223695F3005B7922 /* YummlyServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02092F6223695F3005B7922 /* YummlyServiceTestCase.swift */; };
 		A02093112236C65A005B7922 /* RecipleaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02093102236C65A005B7922 /* RecipleaseViewController.swift */; };
 		A02093132236C67E005B7922 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02093122236C67E005B7922 /* FavoriteViewController.swift */; };
 		A02093182236CA3C005B7922 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02093172236CA3C005B7922 /* SearchResultViewController.swift */; };
@@ -24,6 +24,11 @@
 		A0A3A0C5225F9A02005ECD9C /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A3A0C4225F9A02005ECD9C /* Recipe.swift */; };
 		A0A8BF342247901500496D34 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A8BF332247901500496D34 /* ListTableViewCell.swift */; };
 		A0A8BF362247E47500496D34 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A8BF352247E47500496D34 /* Ingredient.swift */; };
+		A0B5974F227E382300E14BAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02092E1223695ED005B7922 /* AppDelegate.swift */; };
+		A0B59751227E405300E14BAE /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B59750227E405300E14BAE /* Alert.swift */; };
+		A0B59752227E405300E14BAE /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B59750227E405300E14BAE /* Alert.swift */; };
+		A0B59754227E416D00E14BAE /* ExtensionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B59753227E416D00E14BAE /* ExtensionUIViewController.swift */; };
+		A0B59755227E416D00E14BAE /* ExtensionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B59753227E416D00E14BAE /* ExtensionUIViewController.swift */; };
 		A0BD4F5422635BF900F8FBB4 /* Converting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BD4F5322635BF900F8FBB4 /* Converting.swift */; };
 		A0D7C185224924DB0080F144 /* FavorisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D7C184224924DB0080F144 /* FavorisTableViewCell.swift */; };
 		A0E28DC4224BE2A5000DC02F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E28DC3224BE2A5000DC02F /* ListViewController.swift */; };
@@ -56,7 +61,7 @@
 		A02092EB223695F3005B7922 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A02092ED223695F3005B7922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A02092F2223695F3005B7922 /* BonsPetitsPlatsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BonsPetitsPlatsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A02092F6223695F3005B7922 /* BonsPetitsPlatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonsPetitsPlatsTests.swift; sourceTree = "<group>"; };
+		A02092F6223695F3005B7922 /* YummlyServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlyServiceTestCase.swift; sourceTree = "<group>"; };
 		A02092F8223695F3005B7922 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A02093102236C65A005B7922 /* RecipleaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseViewController.swift; sourceTree = "<group>"; };
 		A02093122236C67E005B7922 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +72,8 @@
 		A0A3A0C4225F9A02005ECD9C /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		A0A8BF332247901500496D34 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		A0A8BF352247E47500496D34 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		A0B59750227E405300E14BAE /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		A0B59753227E416D00E14BAE /* ExtensionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIViewController.swift; sourceTree = "<group>"; };
 		A0BD4F5322635BF900F8FBB4 /* Converting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converting.swift; sourceTree = "<group>"; };
 		A0D7C184224924DB0080F144 /* FavorisTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavorisTableViewCell.swift; sourceTree = "<group>"; };
 		A0E28DC3224BE2A5000DC02F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				A02093042236963A005B7922 /* SupportingFiles */,
+				A0B59756227E428600E14BAE /* New Group */,
 				A020930322369631005B7922 /* Controller */,
 				A020930222369628005B7922 /* View */,
 				A020930122369620005B7922 /* Model */,
@@ -142,7 +150,7 @@
 		A02092F5223695F3005B7922 /* BonsPetitsPlatsTests */ = {
 			isa = PBXGroup;
 			children = (
-				A02092F6223695F3005B7922 /* BonsPetitsPlatsTests.swift */,
+				A02092F6223695F3005B7922 /* YummlyServiceTestCase.swift */,
 				A0307AD7227A13AF00695028 /* ConvertTestCase.swift */,
 				A0307AD9227A2CA000695028 /* ListTestCase.swift */,
 				A02092F8223695F3005B7922 /* Info.plist */,
@@ -157,6 +165,7 @@
 				A0D7C18022490D3A0080F144 /* DishList */,
 				A0D7C17F22490A400080F144 /* Ingredient List */,
 				A0BD4F5322635BF900F8FBB4 /* Converting.swift */,
+				A0B59750227E405300E14BAE /* Alert.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,6 +209,14 @@
 				A0091D6C225CDA7A003A683B /* RecipeP.swift */,
 			);
 			path = Persistence;
+			sourceTree = "<group>";
+		};
+		A0B59756227E428600E14BAE /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				A0B59753227E416D00E14BAE /* ExtensionUIViewController.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		A0D7C17F22490A400080F144 /* Ingredient List */ = {
@@ -440,11 +457,13 @@
 				A0A8BF362247E47500496D34 /* Ingredient.swift in Sources */,
 				A0BD4F5422635BF900F8FBB4 /* Converting.swift in Sources */,
 				A0091D6B225CD3B2003A683B /* RecipePlease.xcdatamodeld in Sources */,
+				A0B59754227E416D00E14BAE /* ExtensionUIViewController.swift in Sources */,
 				A02093132236C67E005B7922 /* FavoriteViewController.swift in Sources */,
 				A02093182236CA3C005B7922 /* SearchResultViewController.swift in Sources */,
 				A0A3A0C5225F9A02005ECD9C /* Recipe.swift in Sources */,
 				A02093112236C65A005B7922 /* RecipleaseViewController.swift in Sources */,
 				A0708FD4223AC1770036E0A5 /* List.swift in Sources */,
+				A0B59751227E405300E14BAE /* Alert.swift in Sources */,
 				A0E9CFFE224D152F00A5C504 /* RecipesListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,9 +472,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0B5974F227E382300E14BAE /* AppDelegate.swift in Sources */,
 				A0307ADA227A2CA000695028 /* ListTestCase.swift in Sources */,
-				A02092F7223695F3005B7922 /* BonsPetitsPlatsTests.swift in Sources */,
+				A02092F7223695F3005B7922 /* YummlyServiceTestCase.swift in Sources */,
+				A0B59752227E405300E14BAE /* Alert.swift in Sources */,
 				A0307AD8227A13AF00695028 /* ConvertTestCase.swift in Sources */,
+				A0B59755227E416D00E14BAE /* ExtensionUIViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
