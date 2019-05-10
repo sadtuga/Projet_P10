@@ -13,7 +13,11 @@ class ConvertTestCase: XCTestCase {
 
     func testGivenTotalTimeInSeconds_WhenIsConvertInHour_ThenReturnTheResult() {
         let time = Convert.convertTime(time: 5400)
+        let timeTwo = Convert.convertTime(time: 3600)
+        let timeThree = Convert.convertTime(time: 1800)
         XCTAssertEqual(time, "1h30")
+        XCTAssertEqual(timeTwo, "1h")
+        XCTAssertEqual(timeThree, "30m")
     }
     
     func testGivenAStringArray_WhenIsConvertInLine_ThenReturnTheResult() {

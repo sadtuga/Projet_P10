@@ -21,6 +21,9 @@ class SearchResultViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var labelErreur: UILabel!
     
+    var coreDataStack: CoreDataStack!
+    private lazy var recipeManage = RecipeManage(coreDataStack: coreDataStack, context: coreDataStack.context)
+    
     var recipeID: String!
     var recipeIngredient: String!
     var recipDetails: Recipe?
@@ -47,14 +50,15 @@ class SearchResultViewController: UIViewController {
             guard let image = self.background.image else {print("ERREUR IMAGE FAV");return}
             guard let recipe = recipDetails else {print("ERREUR FAV");return}
             guard let ingredient = recipeIngredient else {print("ERREUR FAV Ingredient");return}
-            RecipeP.save(recipe: recipe, image: image, recipeIngredient: ingredient)
+            recipeManage.save(recipe: recipe, image: image, recipeIngredient: ingredient)
             isFav = true
             modifieFavImage()
         } else {
             guard let id = recipDetails?.id else {return}
-            let index = RecipeP.returnIndex(id: id)
-            AppDelegate.viewContext.delete(RecipeP.all[index])
-            try? AppDelegate.viewContext.save()
+            let index = recipeManage.returnIndex(id: id)
+            if index == -1 {return}
+            recipeManage.context.delete(recipeManage.favoris[index])
+            try? recipeManage.context.save()
             isFav = false
             modifieFavImage()
         }
@@ -72,7 +76,7 @@ class SearchResultViewController: UIViewController {
             if let details = recipe {
                 self.recipDetails = details
                 guard let id = self.recipDetails?.id else {print("ERREUR ID");return}
-                self.isFav = RecipeP.containsRecipe(id)
+                self.isFav = self.recipeManage.containsRecipe(id)
                 self.refreshSreen()
                 self.activityIndicator.isHidden = true
             } else {

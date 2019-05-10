@@ -14,6 +14,9 @@ class FavoriteViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var favLab: UILabel!
     
+    var coreDataStack: CoreDataStack!
+    private lazy var recipeManage = RecipeManage(coreDataStack: coreDataStack, context: coreDataStack.context)
+    
     var recipeList: [RecipeP]?
     var recipeIngredient: String?
     var recipeID: String?
@@ -23,7 +26,7 @@ class FavoriteViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        recipeList = RecipeP.all
+        recipeList = recipeManage.favoris
         guard let count = recipeList?.count else {return}
         hideMessage(count: count)
         tableView.reloadData()
@@ -42,6 +45,7 @@ class FavoriteViewController: UIViewController {
             let successVC = segue.destination as! SearchResultViewController
             successVC.recipeID = recipeID
             successVC.recipeIngredient = recipeIngredient
+            successVC.coreDataStack = coreDataStack
         }
     }
 
@@ -87,9 +91,9 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            AppDelegate.viewContext.delete(RecipeP.all[indexPath.row])
+            recipeManage.context.delete(recipeManage.favoris[indexPath.row])
             recipeList?.remove(at: indexPath.row)
-            try? AppDelegate.viewContext.save()
+            try? recipeManage.context.save()
             tableView.deleteRows(at: [indexPath], with: .automatic)
             guard let count = recipeList?.count else {return}
             hideMessage(count: count)

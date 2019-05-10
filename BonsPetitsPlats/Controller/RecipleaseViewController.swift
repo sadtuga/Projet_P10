@@ -17,6 +17,8 @@ class RecipleaseViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var coreDataStack: CoreDataStack!
+    
     let yummly = YummlyService()
     var list: [Recipe]!
     
@@ -78,6 +80,7 @@ class RecipleaseViewController: UIViewController {
         if segue.identifier == "segueToList" {
             let successVC = segue.destination as! ListViewController
             successVC.list = list
+            successVC.coreDataStack = coreDataStack
         }
     }
     

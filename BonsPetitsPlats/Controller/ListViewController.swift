@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 class ListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var coreDataStack: CoreDataStack!
+    private lazy var recipeManage = RecipeManage(coreDataStack: coreDataStack, context: coreDataStack.context)
+    
     
     var list: [Recipe]?
     var recipeIngredient: String?
@@ -34,6 +39,7 @@ class ListViewController: UIViewController {
             let successVC = segue.destination as! SearchResultViewController
             successVC.recipeID = recipeID
             successVC.recipeIngredient = recipeIngredient
+            successVC.coreDataStack = coreDataStack
         }
     }
     
@@ -65,7 +71,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         guard let id = self.list?[indexPath.row].id else {return UITableViewCell()}
         guard let count = list?.count else {return UITableViewCell()}
         
-        isFav = RecipeP.containsRecipe(id)
+        isFav = recipeManage.containsRecipe(id)
         let ingredient = recipe.ingredients
         
         if tabImage.count < count {
@@ -94,7 +100,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         let add = UIContextualAction(style: .normal, title: "Add Favorites") { (action, view, nil) in
             guard let image = self.tabImage[self.list![indexPath.row].id] else {return}
             guard let recipe = self.list?[indexPath.row] else {return}
-            RecipeP.save(recipe: recipe, image: image)
+            self.recipeManage.save(recipe: recipe, image: image)
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipesCell", for: indexPath) as? RecipesListTableViewCell else {return}
             cell.configureFavImage(fav: true)
             tableView.reloadData()
