@@ -105,7 +105,7 @@
                                             <color key="titleColor" red="0.99963909390000005" green="1" blue="0.99975615740000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="didClearButton:" destination="jLE-qg-BtV" eventType="touchUpInside" id="qGw-NJ-rf9"/>
+                                            <action selector="didTapeClearButton:" destination="jLE-qg-BtV" eventType="touchUpInside" id="ypg-e8-X5R"/>
                                         </connections>
                                     </button>
                                 </subviews>

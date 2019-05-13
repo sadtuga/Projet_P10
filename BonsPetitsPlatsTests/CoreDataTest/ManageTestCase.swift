@@ -25,6 +25,7 @@ class RecipeManagerTestCase: XCTestCase {
         super.tearDown()
     }
     
+    // Add 3 recipes to favorites and check that favorites contain 3 recipes
     func testGivenThreeRecipesSaved_WhenCallGetRecipes_ThenShouldGetThreeRecipes() {
         
         RecipesSampleTests.saveRecipeTest1(with: coreDataStack.context)
@@ -36,16 +37,21 @@ class RecipeManagerTestCase: XCTestCase {
         XCTAssertEqual(recipes.count, 3)
     }
     
-    func testGivenRecipeSaved_WhenGetFirstRecipeID_ThenRecipeIDShouldEqualToTestID() {
+    // Add 3 recipes to favorites and delete one and see if favorites contain 2 recipes
+    func testGivenThreeRecipesSaved_WhenYouDeleteARecipe_ThenShouldGetTwoRecipes() {
         
+        RecipesSampleTests.saveRecipeTest1(with: coreDataStack.context)
         RecipesSampleTests.saveRecipeTest2(with: coreDataStack.context)
-        let testID = "Instant-Pot-Steak-Soup-2621178"
+        RecipesSampleTests.saveRecipeTest3(with: coreDataStack.context)
         
-        let recipeID = recipeManage.favoris.first!.id
+        recipeManage.delete(index: 1)
         
-        XCTAssertEqual(recipeID, testID)
+        let recipes = recipeManage.favoris
+        
+        XCTAssertEqual(recipes.count, 2)
     }
     
+    // Check that the favorites are empty
     func testGivenNoRecipeSaved_WhenCallGetRecipes_ThenRecipesShouldBeEmpty() {
         
         let recipes = recipeManage.favoris
@@ -53,9 +59,10 @@ class RecipeManagerTestCase: XCTestCase {
         XCTAssertTrue(recipes.isEmpty)
     }
     
+    // Save a recipe and use the containsRecipe method to verify that the backup is working
     func testGivenRecipeCreation_WhenSaveTheRecipe_ThenReturnsTrueIfTheBackupSucceeded() {
         
-        let recipe = Recipe(ingredients: "lemon, cream cheese", id: "Lemon-Icebox-Pie-2718913", smallImageUrls: nil, image: nil, recipeName: "Lemon Icebox Pie",  totalTimeInSeconds: 600, rating: 0)
+        let recipe = Recipe(ingredients: "lemon, cream cheese", id: "Lemon-Icebox-Pie-2718913", smallImageUrls: nil, recipeName: "Lemon Icebox Pie",  totalTimeInSeconds: 600, rating: 0)
         let image = UIImage(named: "DefaultImage.jpg")!
         
         recipeManage.save(recipe: recipe, image: image)
@@ -64,8 +71,9 @@ class RecipeManagerTestCase: XCTestCase {
         XCTAssertTrue(fav)
     }
     
+    // Save a recipe and use the containsRecipe method to verify that the backup is working
     func testGivenRecipeCreation_WhenSaveTheRecipeDetails_ThenReturnsTrueIfTheBackupSucceeded() {
-        let recipe = Recipe(ingredients: "lemon, cream cheese", id: "Lemon-Icebox-Pie-2718913", smallImageUrls: nil, image: nil, recipeName: "Lemon Icebox Pie", totalTimeInSeconds: 600, rating: 0)
+        let recipe = Recipe(ingredients: "lemon, cream cheese", id: "Lemon-Icebox-Pie-2718913", smallImageUrls: nil, recipeName: "Lemon Icebox Pie", totalTimeInSeconds: 600, rating: 0)
         let image = UIImage(named: "DefaultImage.jpg")!
         let ingredients = "lemon, apple"
         recipeManage.save(recipe: recipe, image: image, recipeIngredient: ingredients)
@@ -74,6 +82,7 @@ class RecipeManagerTestCase: XCTestCase {
         XCTAssertTrue(fav)
     }
     
+    // Test the returnIndex method
     func testGivenTheAdditionOfThreeRecipeToFavorites_WhenWeCheckTheIndexOfTheRecipe_ThenReturnIndex() {
         RecipesSampleTests.saveRecipeTest1(with: coreDataStack.context)
         RecipesSampleTests.saveRecipeTest2(with: coreDataStack.context)
@@ -86,6 +95,7 @@ class RecipeManagerTestCase: XCTestCase {
         XCTAssertEqual(indexTwo, -1)
     }
     
+    // Test the containsRecipe method
     func testGivenTheAdditionOfARecipeToFavorites_WhenWeCheckIfItIsInTheFavorites_ThenReturnTrueIfThatTheCase() {
         RecipesSampleTests.saveRecipeTest2(with: coreDataStack.context)
         

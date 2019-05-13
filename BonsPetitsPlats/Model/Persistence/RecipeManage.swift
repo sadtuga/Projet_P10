@@ -20,6 +20,7 @@ class RecipeManage: CoreDataManage {
         self.context = context
     }
     
+    // Returns the list of all Recipes to present in list
     var favoris: [RecipeP] {
         let request: NSFetchRequest<RecipeP> = RecipeP.fetchRequest()
         do {
@@ -31,6 +32,7 @@ class RecipeManage: CoreDataManage {
         }
     }
     
+    // Returns true if the received item is in the favorites table
     func containsRecipe(_ element: String) -> Bool {
         for e in favoris {
             if e.id == element {
@@ -40,6 +42,7 @@ class RecipeManage: CoreDataManage {
         return false
     }
     
+    // Return index corresponding to received id
     func returnIndex(id: String) -> Int {
         var index = 0
         for e in favoris {
@@ -51,6 +54,7 @@ class RecipeManage: CoreDataManage {
         return -1
     }
     
+    // Saves the recipe received in the iphone's memory
     func save(recipe: Recipe, image: UIImage) {
         guard containsRecipe(recipe.id) == false else {return}
         let recipeDedails = RecipeP(context: context)
@@ -68,6 +72,7 @@ class RecipeManage: CoreDataManage {
         }
     }
     
+    // Saves the recipe received in the iphone's memory
     func save(recipe: Recipe, image: UIImage, recipeIngredient: String) {
         guard containsRecipe(recipe.id) == false else {return}
         let recipeDedails = RecipeP(context: context)
@@ -78,6 +83,16 @@ class RecipeManage: CoreDataManage {
         let data = image.pngData()
         recipeDedails.image = data
         recipeDedails.ingredients = recipeIngredient
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Detailed recipe saving error: \n \(error) \n User Info Error —> \(error.userInfo)")
+        }
+    }
+    
+    // Deletes the recipe based on the received index
+    func delete(index: Int) {
+        context.delete(favoris[index])
         do {
             try context.save()
         } catch let error as NSError {

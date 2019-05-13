@@ -10,55 +10,62 @@ import XCTest
 @testable import BonsPetitsPlats
 
 class ListTestCase: XCTestCase {
+    
+    let list = List()
 
+    // test the contains method if the list already contains the element
     func testGivenAnIngredient_WhenCheckThatItIsInTheList_ThenReturnTrueIfItIs() {
         let ingredient = Ingredient(name: "soup")
-        List.shared.addIngredient(ingredient: ingredient)
-        let check = List.shared.contains("soup")
-        List.shared.removeAll()
+        list.addIngredient(ingredient: ingredient)
+        let check = list.contains("soup")
+        list.removeAll()
         XCTAssertTrue(check)
     }
     
+    // test the contains method if the list does not contain the element
     func testGivenAnIngredient_WhenCheckThatItIsInTheList_ThenReturnFalseIfThisIsNot() {
         let ingredient = Ingredient(name: "meet")
-        List.shared.addIngredient(ingredient: ingredient)
-        let check = List.shared.contains("soup")
-        List.shared.removeAll()
+        list.addIngredient(ingredient: ingredient)
+        let check = list.contains("soup")
+        list.removeAll()
         XCTAssertFalse(check)
     }
     
+    // Test the createRequestOption method
     func testGivenTwoIngredients_WhenIsCreateOptionRequest_ThenReturnTheRequestOption() {
         let ingredient = Ingredient(name: "meet")
-        List.shared.addIngredient(ingredient: ingredient)
+        list.addIngredient(ingredient: ingredient)
         let ingredientTwo = Ingredient(name: "soup")
-        List.shared.addIngredient(ingredient: ingredientTwo)
+        list.addIngredient(ingredient: ingredientTwo)
         
-        let request = List.shared.createRequestOption()
+        let request = list.createRequestOption()
         XCTAssertEqual(request, "meet+soup")
-        List.shared.removeAll()
+        list.removeAll()
     }
     
+    // Test the addIngredient and listCount method
     func testGivenTwoIngredients_WhenWeCountTheNumberOfIngredients_ThenReturnTheNumberOfIngredients() {
         let ingredient = Ingredient(name: "meet")
-        List.shared.addIngredient(ingredient: ingredient)
+        list.addIngredient(ingredient: ingredient)
         let ingredientTwo = Ingredient(name: "soup")
-        List.shared.addIngredient(ingredient: ingredientTwo)
+        list.addIngredient(ingredient: ingredientTwo)
         
-        let count = List.shared.listCount()
+        let count = list.listCount()
         XCTAssertEqual(count, 2)
-        List.shared.removeAll()
+        list.removeAll()
     }
     
+    // Test the removeIngredient method
     func testGivenTwoIngredients_WhenWeRemoveOneOfTheIngredients_ThenTheNumberOfIngredientsToReturnMustBeEqualToOne() {
         let ingredient = Ingredient(name: "meet")
-        List.shared.addIngredient(ingredient: ingredient)
+        list.addIngredient(ingredient: ingredient)
         let ingredientTwo = Ingredient(name: "soup")
-        List.shared.addIngredient(ingredient: ingredientTwo)
-        List.shared.removeIngredient(index: 1)
+        list.addIngredient(ingredient: ingredientTwo)
+        list.removeIngredient(index: 1)
         
-        let count = List.shared.listCount()
+        let count = list.listCount()
         XCTAssertEqual(count, 1)
-        List.shared.removeAll()
+        list.removeAll()
     }
 
 }

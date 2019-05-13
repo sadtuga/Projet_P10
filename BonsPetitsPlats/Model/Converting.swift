@@ -12,6 +12,7 @@ import UIKit
 
 class Convert {
     
+    // Convert time in seconds to hours
     static func convertTime(time: Int) -> String {
         var quotien: Int = 0
         var reste: Int = 0
@@ -26,6 +27,7 @@ class Convert {
         return String(time / 60) + "m"
     }
     
+   // Puts the ingredients on one line
     static func makeIngredientLine(text: [String]) -> String {
         var string: String = ""
         for e in text {
@@ -35,6 +37,7 @@ class Convert {
         return string
     }
     
+    // Create an ingredient list
     static func makeIngredientList(text: [String]) -> String {
         var list = ""
         for e in text {

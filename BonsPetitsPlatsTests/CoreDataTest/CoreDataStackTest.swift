@@ -13,16 +13,16 @@ import CoreData
 class CoreDataStackTest: CoreDataStack {
     
     convenience init() {
-        self.init(modelName: "RecipePlease")
+        self.init(name: "RecipePlease")
     }
     
-    override init(modelName: String) {
-        super.init(modelName: modelName)
+    override init(name: String) {
+        super.init(name: name)
         
         let persistentStoreDescription = NSPersistentStoreDescription()
         persistentStoreDescription.type = NSInMemoryStoreType
         
-        let container = NSPersistentContainer(name: modelName)
+        let container = NSPersistentContainer(name: name)
         container.persistentStoreDescriptions = [persistentStoreDescription]
         
         container.loadPersistentStores { (storeDescription, error) in

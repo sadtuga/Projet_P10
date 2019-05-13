@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
+// Stock information about a recipe
 struct Recipe {
     var ingredients: String
     var id: String
     var smallImageUrls: URL?
-    var image: UIImage?
     var recipeName: String
     var totalTimeInSeconds: Int
     var rating: Int

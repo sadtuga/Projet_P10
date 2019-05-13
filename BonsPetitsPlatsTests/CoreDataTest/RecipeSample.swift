@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 @testable import BonsPetitsPlats
 
+// This Structure contains 3 method that allows to add favorite dishes for the coreData test
 struct RecipesSampleTests {
     
     private static let imageDataTest = "DefaultImage.jpg".data(using: .utf8) as NSData?

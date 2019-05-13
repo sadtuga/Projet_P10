@@ -8,6 +8,7 @@
 
 import UIKit
 
+// 
 class FavorisTableViewCell: UITableViewCell {
 
     @IBOutlet weak var background: UIImageView!
@@ -22,11 +23,11 @@ class FavorisTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func configure(name: String, ingredient: String, time: String, like: Int, background: UIImage?) {
+    func configure(name: String, ingredient: String, time: String, like: String, background: UIImage?) {
         self.name.text = name
         self.ingredients.text = ingredient
         self.duration.text = time
-        self.like.text = String(like)
+        self.like.text = like + "/5"
         self.background.image = background
     }
     

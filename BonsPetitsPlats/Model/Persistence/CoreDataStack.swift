@@ -11,18 +11,19 @@ import CoreData
 
 class CoreDataStack {
     
-    private let modelName: String
+    private let name: String
     
-    init(modelName: String) {
-        self.modelName = modelName
+    init(name: String) {
+        self.name = name
     }
     
     lazy var context: NSManagedObjectContext = {
         return self.contextContainer.viewContext
     }()
     
+    // This internal property must be changed (overrided) only for tests purpose to change persistent store type
     lazy var contextContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: modelName)
+        let container = NSPersistentContainer(name: name)
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
                 print("Unresolved error \(error), \(error.userInfo)")
@@ -31,6 +32,7 @@ class CoreDataStack {
         return container
     }()
     
+    // Saves the context in case it has changed
     func saveContext () {
         guard context.hasChanges else { return }
         

@@ -12,7 +12,8 @@ import XCTest
 class YummlyServiceTestCase: XCTestCase {
     
     let yummly = YummlyService()
-
+    
+    // Test if the getReciteList method works
     func testGetRecipesListShouldReturnARecipeArray() {
         let expectation = XCTestExpectation(description: "Wait for request.")
         
@@ -25,28 +26,29 @@ class YummlyServiceTestCase: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
+    // Test if the detailsRecipe method works
     func testDetailsRecipeShouldReturnARecipeDetails() {
         let expectation = XCTestExpectation(description: "Wait for request.")
         
-        yummly.detailsRecipe(id: "Busy-Day-Soup-2553114") { (succes, recipe) in
-            XCTAssertTrue(succes)
+        yummly.detailsRecipe(id: "Busy-Day-Soup-2553114") { (recipe) in
             XCTAssertNotNil(recipe)
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: 5)
     }
     
+    // Test if the getImage method works
     func testGetImageShouldReturnAnImage() {
         let imageUrl = URL(string: "https://lh3.googleusercontent.com/GIRatm4HOl4_RCQoCEtA4ZKeP8J9G6gi4a7_wYmQUHEmkkKstAno67BzodTEYtW3y6sxpI8JIV0NYoo7RnedRw=s200")!
         
         let expectation = XCTestExpectation(description: "Wait for request.")
         
-        yummly.getImage(url: imageUrl) { (succes, image) in
+        yummly.getImage(url: imageUrl) { (image) in
             XCTAssertNotNil(image)
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 3)
+        wait(for: [expectation], timeout: 5)
     }
 
 }

@@ -45,6 +45,7 @@ class SearchResultViewController: UIViewController {
         }
     }
     
+    // Add or delete the recipe
     @IBAction func addToFavorite(_ sender: Any) {
         if isFav == false {
             guard let image = self.background.image else {print("ERREUR IMAGE FAV");return}
@@ -57,13 +58,13 @@ class SearchResultViewController: UIViewController {
             guard let id = recipDetails?.id else {return}
             let index = recipeManage.returnIndex(id: id)
             if index == -1 {return}
-            recipeManage.context.delete(recipeManage.favoris[index])
-            try? recipeManage.context.save()
+            recipeManage.delete(index: index)
             isFav = false
             modifieFavImage()
         }
     }
     
+    // Redirects the user on safaris to show him the instructions for the recipe
     @IBAction func didTapeGetDirectionsButton(_ sender: Any) {
         guard let id = recipDetails?.id else {return}
         guard let url = URL(string: "https://www.yummly.com/recipe/" + id) else { return }
@@ -71,8 +72,10 @@ class SearchResultViewController: UIViewController {
         UIApplication.shared.open(url)
     }
     
+    // Starts a network call and interprets the received data
     private func getRecipeDetails() {
-        yummly.detailsRecipe(id: recipeID) { (succes, recipe) in
+        guard let id = recipeID else {return}
+        yummly.detailsRecipe(id: id) { (recipe) in
             if let details = recipe {
                 self.recipDetails = details
                 guard let id = self.recipDetails?.id else {print("ERREUR ID");return}
@@ -89,6 +92,7 @@ class SearchResultViewController: UIViewController {
         }
     }
     
+    // Change the icon depending on whether the recipe is in favorites or not
     private func modifieFavImage() {
         if isFav == true {
             favoriteButton.setImage(#imageLiteral(resourceName: "WhiteFavoriteAdd"), for: UIControl.State.normal)
@@ -97,16 +101,17 @@ class SearchResultViewController: UIViewController {
         }
     }
     
+    // Displays the elements that make up the controller display
     private func viewDetail() {
         viewDetails.isHidden = false
         ingredientList.isHidden = false
         getDirectionButton.isHidden = false
     }
     
+    // Update the display taking into account the parameters received
     private func refreshSreen() {
         guard let url = recipDetails?.smallImageUrls else {print("ERREUR URL GET IMAGE");return}
-        yummly.getImage(url: url) { (succes, image) in
-            
+        yummly.getImage(url: url) { (image) in
             guard let name = self.recipDetails?.recipeName else {print("eurreur name");return}
             guard let like = self.recipDetails?.rating else {print("eurreur like");return}
             guard let time = self.recipDetails?.totalTimeInSeconds else {print("eurreur time");return}
@@ -114,7 +119,7 @@ class SearchResultViewController: UIViewController {
             let imageDetails = image
             
             self.name.text = name
-            self.like.text = String(like)
+            self.like.text = String(like) + "/5"
             self.duration.text = Convert.convertTime(time: time)
             self.background.image = imageDetails
             self.ingredientList.text = ingredients

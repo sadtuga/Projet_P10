@@ -10,27 +10,30 @@ import Foundation
 
 class List {
     
-    static let shared = List()
-    private init() {}
-    
+    // Stock the ingredients entered by the user
     private(set) var list: [Ingredient] = []
     
+    // Add an ingredient to the list
     func addIngredient(ingredient: Ingredient) {
         list.append(ingredient)
     }
     
+    // Deletes an ingredient from the list array
     func removeIngredient(index: Int) {
         list.remove(at: index)
     }
     
+    // Remove all the ingredients from the list array
     func removeAll() {
         list.removeAll()
     }
     
+    // Return the number of items in the list array
     func listCount() -> Int {
         return list.count
     }
     
+    // Created the query parameter using the list array
     func createRequestOption() -> String {
         var option: String = ""
         for e in list {
@@ -45,6 +48,7 @@ class List {
         return option
     }
     
+    // Returns true if the list array contains the element received as a parameter
     func contains(_ text: String) -> Bool {
         for e in list {
             if e.name == text {

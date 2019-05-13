@@ -159,8 +159,8 @@
 		A02092F5223695F3005B7922 /* BonsPetitsPlatsTests */ = {
 			isa = PBXGroup;
 			children = (
+				A0281C3122870A1B0088D283 /* YummlyServiceTest */,
 				A08A20D022833CD6005693B8 /* CoreDataTest */,
-				A02092F6223695F3005B7922 /* YummlyServiceTestCase.swift */,
 				A0307AD7227A13AF00695028 /* ConvertTestCase.swift */,
 				A0307AD9227A2CA000695028 /* ListTestCase.swift */,
 				A02092F8223695F3005B7922 /* Info.plist */,
@@ -210,6 +210,14 @@
 				A02092E1223695ED005B7922 /* AppDelegate.swift */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		A0281C3122870A1B0088D283 /* YummlyServiceTest */ = {
+			isa = PBXGroup;
+			children = (
+				A02092F6223695F3005B7922 /* YummlyServiceTestCase.swift */,
+			);
+			path = YummlyServiceTest;
 			sourceTree = "<group>";
 		};
 		A07F14E82259ED940071A9F8 /* Persistence */ = {

@@ -19,24 +19,22 @@ class RecipesListTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    func configure(name: String, ingredient: String, time: Int, like: Int, background: UIImage?, isFav: Bool) {
+    func configure(name: String, ingredient: String, time: String, like: String, background: UIImage?, isFav: Bool) {
         self.background.image = background
-        self.like.text = String(like)
-        self.time.text = Convert.convertTime(time: time)
+        self.like.text = like + "/5"
+        self.time.text = time
         self.name.text = name
         self.ingredient.text = ingredient
         configureFavImage(fav: isFav)
     }
     
+    // Change the icon depending on whether the recipe is in favorites or not
     func configureFavImage(fav: Bool) {
         if fav == true {
             favorites.image = #imageLiteral(resourceName: "WhiteFavoriteAdd")
