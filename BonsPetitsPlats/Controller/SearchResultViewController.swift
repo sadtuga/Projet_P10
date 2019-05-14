@@ -26,12 +26,12 @@ class SearchResultViewController: UIViewController {
     
     var recipeID: String!
     var recipeIngredient: String!
-    var recipDetails: Recipe?
-    var image: UIImage?
+    private var recipDetails: Recipe?
+    private var image: UIImage?
     
-    let yummly = YummlyService()
+    private let yummly = YummlyService()
     
-    var isFav: Bool = false
+    private var isFav: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +80,7 @@ class SearchResultViewController: UIViewController {
                 self.recipDetails = details
                 guard let id = self.recipDetails?.id else {print("ERREUR ID");return}
                 self.isFav = self.recipeManage.containsRecipe(id)
-                self.refreshSreen()
+                self.getRecipeImage()
                 self.activityIndicator.isHidden = true
             } else {
                 print("ERREUR DETAILS")
@@ -108,24 +108,29 @@ class SearchResultViewController: UIViewController {
         getDirectionButton.isHidden = false
     }
     
-    // Update the display taking into account the parameters received
-    private func refreshSreen() {
+    // Retrieve the image returned by the network call
+    private func getRecipeImage() {
         guard let url = recipDetails?.smallImageUrls else {print("ERREUR URL GET IMAGE");return}
         yummly.getImage(url: url) { (image) in
-            guard let name = self.recipDetails?.recipeName else {print("eurreur name");return}
-            guard let like = self.recipDetails?.rating else {print("eurreur like");return}
-            guard let time = self.recipDetails?.totalTimeInSeconds else {print("eurreur time");return}
-            guard let ingredients = self.recipDetails?.ingredients else {print("eurreur ingredient");return}
-            let imageDetails = image
-            
-            self.name.text = name
-            self.like.text = String(like) + "/5"
-            self.duration.text = Convert.convertTime(time: time)
-            self.background.image = imageDetails
-            self.ingredientList.text = ingredients
-            self.modifieFavImage()
-            self.viewDetail()
+            self.refreshSreen(image: image)
         }
+    }
+    
+    // Update the display taking into account the parameters received
+    private func refreshSreen(image: UIImage) {
+        guard let name = self.recipDetails?.recipeName else {print("eurreur name");return}
+        guard let like = self.recipDetails?.rating else {print("eurreur like");return}
+        guard let time = self.recipDetails?.totalTimeInSeconds else {print("eurreur time");return}
+        guard let ingredients = self.recipDetails?.ingredients else {print("eurreur ingredient");return}
+        let imageDetails = image
+        
+        self.name.text = name
+        self.like.text = String(like) + "/5"
+        self.duration.text = Convert.convertTime(time: time)
+        self.background.image = imageDetails
+        self.ingredientList.text = ingredients
+        self.modifieFavImage()
+        self.viewDetail()
     }
  
 }

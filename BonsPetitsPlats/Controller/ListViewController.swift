@@ -20,9 +20,9 @@ class ListViewController: UIViewController {
     var list: [Recipe]?
     var recipeIngredient: String?
     var recipeID: String!
-    var yummly = YummlyService()
     
-    var tabImage: [String:UIImage] = [:]
+    private var yummly = YummlyService()
+    private var tabImage: [String:UIImage] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()

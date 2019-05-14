@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class YummlyService {
     
-    var imagedetails: UIImage?
+    private var imagedetails: UIImage?
     
     // Download a list of recipes and return it using the callBack parameter
     func getReciteList(text: String, callback: @escaping (Bool, [Recipe]?) -> Void) {
@@ -52,7 +52,7 @@ class YummlyService {
     }
     
     // Interprets the data received by the Yummly API and returns a recipe
-    func updateRecipe(data: JSON, isDetails: Bool) -> Recipe {
+    private func updateRecipe(data: JSON, isDetails: Bool) -> Recipe {
         
         let id = data["id"].stringValue
         let rate = data["rating"].intValue

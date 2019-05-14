@@ -18,10 +18,9 @@ class RecipleaseViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var coreDataStack: CoreDataStack!
-    var yummly = YummlyService()
-    var list = List()
-    
     var recipeList: [Recipe]!
+    private var yummly = YummlyService()
+    private var list = List()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
