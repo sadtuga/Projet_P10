@@ -19,6 +19,7 @@ class SearchResultViewController: UIViewController {
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var ingredientList: UITextView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var ingredientLabel: UILabel!
     @IBOutlet weak var labelErreur: UILabel!
     
     var coreDataStack: CoreDataStack!
@@ -106,6 +107,7 @@ class SearchResultViewController: UIViewController {
         viewDetails.isHidden = false
         ingredientList.isHidden = false
         getDirectionButton.isHidden = false
+        ingredientLabel.isHidden = false
     }
     
     // Retrieve the image returned by the network call
