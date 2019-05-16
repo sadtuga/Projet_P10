@@ -41,7 +41,7 @@ class List {
         }
         
         if option != "" {
-            let index = option.lastIndex(of: "+")!
+            guard let index = option.lastIndex(of: "+") else {return "ERREUR createRequestOption"}
             option.remove(at: index)
         }
         

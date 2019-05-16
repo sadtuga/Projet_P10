@@ -15,7 +15,7 @@ extension UIViewController {
         let firstNotif = Notification.Name(rawValue: "NetworkError")
         NotificationCenter.default.addObserver(self, selector: #selector(networkError), name: firstNotif, object: nil)
     }
-    
+
     // Show a custom alert based on title and message received
     func alert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -23,9 +23,14 @@ extension UIViewController {
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
     }
-    
+
     // Display a network alert
     @objc func networkError() {
         alert(title: "NetworkError", message: "A network error occurred to verify your connection!")
+    }
+
+    // Display a network alert
+    @objc func networkImageError() {
+        alert(title: "NetworkError", message: "An error occurred while uploading the image")
     }
 }

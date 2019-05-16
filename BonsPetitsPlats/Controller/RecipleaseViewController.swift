@@ -41,11 +41,11 @@ class RecipleaseViewController: UIViewController {
         guard textField.text != nil, list.contains(text) == false else {
             return
         }
-        guard textField!.text!.count >= 1 else {
+        guard text.count >= 1 else {
             return
         }
         
-        let ingredient = Ingredient(name: textField.text!)
+        let ingredient = Ingredient(name: text)
         
         list.addIngredient(ingredient: ingredient)
         tableView.reloadData()
@@ -85,7 +85,7 @@ class RecipleaseViewController: UIViewController {
     // Prepares the transition to ListViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToList" {
-            let successVC = segue.destination as! ListViewController
+            guard let successVC = segue.destination as? ListViewController else {return} 
             successVC.list = recipeList
             successVC.coreDataStack = coreDataStack
         }

@@ -20,18 +20,18 @@ class ConvertTestCase: XCTestCase {
         XCTAssertEqual(timeTwo, "1h")
         XCTAssertEqual(timeThree, "30m")
     }
-    
+
     // Test the conversion of a string array as a line
     func testGivenAStringArray_WhenIsConvertInLine_ThenReturnTheResult() {
-        let ingredientTab = ["ground beef","onion soup mix","frozen vegetables","water","diced tomatoes","macaroni"]
+        let ingredientTab = ["ground beef", "onion soup mix", "frozen vegetables", "water", "diced tomatoes", "macaroni"]
         let result = " ground beef, onion soup mix, frozen vegetables, water, diced tomatoes, macaroni"
         let ingredientLine = Convert.makeIngredientLine(text: ingredientTab)
         XCTAssertEqual(ingredientLine, result)
     }
-    
+
     // Test the conversion of a string array as a list
     func testGivenAStringArray_WhenIsConvertInList_ThenReturnTheResult() {
-        let ingredientTab = ["ground beef","onion soup mix","frozen vegetables","water","diced tomatoes","macaroni"]
+        let ingredientTab = ["ground beef", "onion soup mix", "frozen vegetables", "water", "diced tomatoes", "macaroni"]
         let result = "- ground beef\n- onion soup mix\n- frozen vegetables\n- water\n- diced tomatoes\n- macaroni\n"
         let ingredientList = Convert.makeIngredientList(text: ingredientTab)
         XCTAssertEqual(ingredientList, result)

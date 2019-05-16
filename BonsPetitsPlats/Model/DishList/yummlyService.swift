@@ -11,14 +11,18 @@ import Alamofire
 import SwiftyJSON
 
 class YummlyService {
-    
+
     private var imagedetails: UIImage?
     
+    let recipeListUrl = "https://api.yummly.com/v1/api/recipes"
+    let recipeDetailsURL = "https://api.yummly.com/v1/api/recipe/"
+    let idAndAppKey = "?_app_id=60663c48&_app_key=8855b3f3dfde11bd74a54030f8017176"
+
     // Download a list of recipes and return it using the callBack parameter
     func getReciteList(text: String, callback: @escaping (Bool, [Recipe]?) -> Void) {
         guard let q = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
-        guard let url = URL(string: "https://api.yummly.com/v1/api/recipes?_app_id=60663c48&_app_key=8855b3f3dfde11bd74a54030f8017176&q=\(q)") else {return}
-        
+        guard let url = URL(string: recipeListUrl + idAndAppKey + "&q=" + q) else {return}
+
         AF.request(url).validate().responseJSON { response in
             guard let data = response.data, response.error == nil else {
                 callback(false, nil)
@@ -28,59 +32,65 @@ class YummlyService {
             callback(true, recipe)
         }
     }
-    
+
     // Interprets the data received by the Yummly API and returns a recipe table
     private func jsonToRecipeList(data: JSON) -> [Recipe] {
         var recipes = [Recipe]()
         for match in data["matches"].arrayValue {
-            recipes.append(updateRecipe(data: match, isDetails: false))
+            recipes.append(updateRecipe(data: match))
         }
         return recipes
     }
-    
+
     // Download the recipe according to the received id
     func detailsRecipe(id: String, callback: @escaping (Recipe?) -> Void) {
-        guard let url = URL(string: "https://api.yummly.com/v1/api/recipe/\(id)?_app_id=60663c48&_app_key=8855b3f3dfde11bd74a54030f8017176") else {return}
+        guard let url = URL(string: recipeDetailsURL + id + idAndAppKey) else {return}
         AF.request(url).validate().responseJSON { response in
             guard let data = response.data, response.error == nil else {
                 callback(nil)
                 return
             }
-            let recipeDetail = self.updateRecipe(data: JSON(data), isDetails: true)
+            let recipeDetail = self.updateRecipeDetails(data: JSON(data))
             callback(recipeDetail)
         }
     }
     
     // Interprets the data received by the Yummly API and returns a recipe
-    private func updateRecipe(data: JSON, isDetails: Bool) -> Recipe {
+    private func updateRecipe(data: JSON) -> Recipe {
         
         let id = data["id"].stringValue
         let rate = data["rating"].intValue
         let time = data["totalTimeInSeconds"].intValue
-        var name = ""
-        var ingredients: [String]
-        var ingredientList: String = ""
+        let name = data["recipeName"].stringValue
+        let ingredients: [String] = data["ingredients"].arrayValue.map{$0.stringValue}
+        let ingredientList: String = Convert.makeIngredientLine(text: ingredients)
         var url: URL? = nil
         
-        if isDetails == true {
-            if let urlTemp = data["images"][0]["hostedLargeUrl"].url {
-                url = urlTemp
-                ingredients = data["ingredientLines"].arrayValue.map{$0.stringValue}
-                ingredientList = Convert.makeIngredientList(text: ingredients)
-                name = data["name"].stringValue
-            } else {print("ERREUR URL 1")}
-        } else {
-            if let urlTemp = URL(string: (data["smallImageUrls"][0].string?.replacingOccurrences(of: "=s90", with: ""))!) {
-                url = urlTemp
-                ingredients = data["ingredients"].arrayValue.map{$0.stringValue}
-                ingredientList = Convert.makeIngredientLine(text: ingredients)
-                name = data["recipeName"].stringValue
-            } else {print("ERREUR URL 2")}
+        if let urlString = data["smallImageUrls"][0].string?.replacingOccurrences(of: "=s90", with: "") {
+            url = URL(string: urlString)
         }
         
         return Recipe(ingredients: ingredientList, id: id, smallImageUrls: url, recipeName: name, totalTimeInSeconds: time, rating: rate)
     }
     
+    // Interprets the data received by the Yummly API and returns a recipe
+    private func updateRecipeDetails(data: JSON) -> Recipe {
+        
+        let id = data["id"].stringValue
+        let rate = data["rating"].intValue
+        let time = data["totalTimeInSeconds"].intValue
+        let name = data["name"].stringValue
+        let ingredients: [String] = data["ingredientLines"].arrayValue.map{$0.stringValue}
+        let ingredientList: String = Convert.makeIngredientList(text: ingredients)
+        var url: URL? = nil
+        
+        if let urlTemp = data["images"][0]["hostedLargeUrl"].url {
+            url = urlTemp
+        }
+        
+        return Recipe(ingredients: ingredientList, id: id, smallImageUrls: url, recipeName: name, totalTimeInSeconds: time, rating: rate)
+    }
+
     // Download the image corresponding to the recipe
     func getImage(url: URL, imageHandler: @escaping ((UIImage) -> ())) {
         AF.request(url).responseData (completionHandler: { (response) in
@@ -93,5 +103,4 @@ class YummlyService {
             imageHandler(imageOut)
         })
     }
-    
 }

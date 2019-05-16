@@ -44,7 +44,7 @@ class FavoriteViewController: UIViewController {
     // Prepares the transition to SearchResultViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToDetails" {
-            let successVC = segue.destination as! SearchResultViewController
+            guard let successVC = segue.destination as? SearchResultViewController else {return}
             successVC.recipeID = recipeID
             successVC.recipeIngredient = recipeIngredient
             successVC.coreDataStack = coreDataStack

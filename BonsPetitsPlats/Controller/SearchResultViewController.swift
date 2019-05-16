@@ -78,8 +78,8 @@ class SearchResultViewController: UIViewController {
         guard let id = recipeID else {return}
         yummly.detailsRecipe(id: id) { (recipe) in
             if let details = recipe {
-                self.recipDetails = details
                 guard let id = self.recipDetails?.id else {print("ERREUR ID");return}
+                self.recipDetails = details
                 self.isFav = self.recipeManage.containsRecipe(id)
                 self.getRecipeImage()
                 self.activityIndicator.isHidden = true

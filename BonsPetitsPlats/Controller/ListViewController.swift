@@ -37,13 +37,12 @@ class ListViewController: UIViewController {
     // Prepares the transition to SearchResultViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToDetails" {
-            let successVC = segue.destination as! SearchResultViewController
+            guard let successVC = segue.destination as? SearchResultViewController else {return}
             successVC.recipeID = recipeID
             successVC.recipeIngredient = recipeIngredient
             successVC.coreDataStack = coreDataStack
         }
     }
-    
 }
 
 extension ListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -72,26 +71,16 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         var isFav: Bool = false
         
         guard let recipe = list?[indexPath.row] else {return UITableViewCell()}
-        guard let id = self.list?[indexPath.row].id else {return UITableViewCell()}
-        guard let count = list?.count else {return UITableViewCell()}
-        guard let timeTemp = list?[indexPath.row].totalTimeInSeconds else {return UITableViewCell()}
-        let time = Convert.convertTime(time: timeTemp)
+        guard let url = recipe.smallImageUrls else {networkImageError();return UITableViewCell()}
+        let time = Convert.convertTime(time: recipe.totalTimeInSeconds)
         let rate = String(recipe.rating)
         
-        isFav = recipeManage.containsRecipe(id)
-        let ingredient = recipe.ingredients
+        isFav = recipeManage.containsRecipe(recipe.id)
         
-        if tabImage.count < count {
-            guard let url = recipe.smallImageUrls else {print("ERREUR URL");return UITableViewCell()}
-            yummly.getImage(url: url) { (image) in
-                cell.configure(name: recipe.recipeName, ingredient: ingredient, time: time, like: rate, background: image, isFav: isFav)
-                self.tabImage.updateValue(image, forKey: recipe.id)
-            }
-        } else {
-            guard let background = tabImage[recipe.id] else {return UITableViewCell()}
-            cell.configure(name: recipe.recipeName, ingredient: ingredient, time: time, like: rate, background: background, isFav: isFav)
+        yummly.getImage(url: url) { (image) in
+            cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: time, like: rate, background: image, isFav: isFav)
+            self.tabImage.updateValue(image, forKey: recipe.id)
         }
-        
         return cell
     }
     
