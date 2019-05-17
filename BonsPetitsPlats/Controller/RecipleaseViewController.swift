@@ -19,8 +19,8 @@ class RecipleaseViewController: UIViewController {
     
     var coreDataStack: CoreDataStack!
     var recipeList: [Recipe]!
-    private var yummly = YummlyService()
-    private var list = List()
+    private let yummly = YummlyService()
+    private let list = List()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

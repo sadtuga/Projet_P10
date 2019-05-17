@@ -21,7 +21,7 @@ class ListViewController: UIViewController {
     var recipeIngredient: String?
     var recipeID: String!
     
-    private var yummly = YummlyService()
+    private let yummly = YummlyService()
     private var tabImage: [String:UIImage] = [:]
     
     override func viewDidLoad() {
@@ -42,6 +42,28 @@ class ListViewController: UIViewController {
             successVC.recipeIngredient = recipeIngredient
             successVC.coreDataStack = coreDataStack
         }
+    }
+    
+    // create a RecipesListTableViewCell
+    private func createCell(count: Int, index: Int, cell: RecipesListTableViewCell) -> RecipesListTableViewCell? {
+        guard let recipe = list?[index] else {return nil}
+        var isFav: Bool = false
+        isFav = recipeManage.containsRecipe(recipe.id)
+        let time = Convert.convertTime(time: recipe.totalTimeInSeconds)
+        let rate = String(recipe.rating)
+        
+        if tabImage.count < count {
+            guard let url = recipe.smallImageUrls else {print("ERREUR URL");return nil}
+            yummly.getImage(url: url) { (image) in
+                cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: time, like: rate, background: image, isFav: isFav)
+                self.tabImage.updateValue(image, forKey: recipe.id)
+            }
+        } else {
+            guard let background = tabImage[recipe.id] else {return nil}
+            cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: time, like: rate, background: background, isFav: isFav)
+        }
+        
+        return cell
     }
 }
 
@@ -68,22 +90,12 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         
-        var isFav: Bool = false
+        guard let count = list?.count else {return UITableViewCell()}
+        guard let cellCustom = createCell(count: count, index: indexPath.row, cell: cell) else {return UITableViewCell()}
         
-        guard let recipe = list?[indexPath.row] else {return UITableViewCell()}
-        guard let url = recipe.smallImageUrls else {networkImageError();return UITableViewCell()}
-        let time = Convert.convertTime(time: recipe.totalTimeInSeconds)
-        let rate = String(recipe.rating)
-        
-        isFav = recipeManage.containsRecipe(recipe.id)
-        
-        yummly.getImage(url: url) { (image) in
-            cell.configure(name: recipe.recipeName, ingredient: recipe.ingredients, time: time, like: rate, background: image, isFav: isFav)
-            self.tabImage.updateValue(image, forKey: recipe.id)
-        }
-        return cell
+        return cellCustom
     }
-    
+
     // Switch to the SearchResultViewController view by selecting a UITableViewCell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let recipe = list?[indexPath.row] else {return}

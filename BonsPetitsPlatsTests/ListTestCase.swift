@@ -11,7 +11,7 @@ import XCTest
 
 class ListTestCase: XCTestCase {
 
-    let list = List()
+    private let list = List()
 
     // test the contains method if the list already contains the element
     func testGivenAnIngredient_WhenCheckThatItIsInTheList_ThenReturnTrueIfItIs() {

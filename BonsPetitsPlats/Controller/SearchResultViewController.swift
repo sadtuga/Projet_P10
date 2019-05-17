@@ -31,7 +31,6 @@ class SearchResultViewController: UIViewController {
     private var image: UIImage?
     
     private let yummly = YummlyService()
-    
     private var isFav: Bool = false
 
     override func viewDidLoad() {
@@ -78,8 +77,8 @@ class SearchResultViewController: UIViewController {
         guard let id = recipeID else {return}
         yummly.detailsRecipe(id: id) { (recipe) in
             if let details = recipe {
-                guard let id = self.recipDetails?.id else {print("ERREUR ID");return}
                 self.recipDetails = details
+                guard let id = self.recipDetails?.id else {print("ERREUR ID");return}
                 self.isFav = self.recipeManage.containsRecipe(id)
                 self.getRecipeImage()
                 self.activityIndicator.isHidden = true

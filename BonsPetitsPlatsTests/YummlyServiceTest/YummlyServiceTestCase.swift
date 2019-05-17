@@ -11,8 +11,8 @@ import XCTest
 
 class YummlyServiceTestCase: XCTestCase {
 
-    let yummly = YummlyService()
-    let urlImage: String = "https://lh3.googleusercontent.com/GIRatm4HOl4_RCQoCEtA4ZKeP8J9G6gi4a7_wYmQUHEmkkKstAno67BzodTEYtW3y6sxpI8JIV0NYoo7RnedRw=s200"
+    private let yummly = YummlyService()
+    private let urlImage: String = "https://lh3.googleusercontent.com/GIRatm4HOl4_RCQoCEtA4ZKeP8J9G6gi4a7_wYmQUHEmkkKstAno67BzodTEYtW3y6sxpI8JIV0NYoo7RnedRw=s200"
 
     // Test if the getReciteList method works
     func testGetRecipesListShouldReturnARecipeArray() {
