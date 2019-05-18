@@ -92,15 +92,15 @@ class YummlyService {
     }
 
     // Download the image corresponding to the recipe
-    func getImage(url: URL, imageHandler: @escaping ((UIImage) -> ())) {
+    func getImage(url: URL, callback: @escaping ((UIImage) -> ())) {
         AF.request(url).responseData (completionHandler: { (response) in
             guard let image = response.data, response.error == nil else {
                 guard let imageDefault = UIImage(named: "DefaultImage.jpg") else {print("ERREUR IMAGE DEFAULT");return}
-                imageHandler(imageDefault)
+                callback(imageDefault)
                 return
             }
             guard let imageOut = UIImage(data: image) else {print("ERREUR IMAGE");return}
-            imageHandler(imageOut)
+            callback(imageOut)
         })
     }
 }

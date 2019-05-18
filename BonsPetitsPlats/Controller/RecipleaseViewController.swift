@@ -70,7 +70,7 @@ class RecipleaseViewController: UIViewController {
             enableButton()
             return
         }
-        
+
         yummly.getReciteList(text: option) { (succes, recipe) in
             if succes == true {
                 self.recipeList = recipe
